@@ -14,7 +14,8 @@ public class OLC1_Proyecto1_202004071 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MenuPrincipal ventana = new MenuPrincipal();
+        ventana.setVisible(true);
     }
     
 }
