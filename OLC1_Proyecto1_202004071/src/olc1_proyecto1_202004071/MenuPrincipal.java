@@ -5,10 +5,16 @@
 package olc1_proyecto1_202004071;
 
 import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -42,6 +48,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(29, 85, 227));
+
+        Pestanas.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                PestanasStateChanged(evt);
+            }
+        });
 
         jMenu1.setText("Archivo");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,37 +90,64 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(Pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(808, Short.MAX_VALUE))
+                .addContainerGap(811, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(Pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addComponent(Pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(340, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void cargarArchivo(String extension, JTextArea cuadroTexto) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos " + extension, extension));
 
+        int resultado = fileChooser.showOpenDialog(this);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+                StringBuilder contenido = new StringBuilder();
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    contenido.append(linea).append("\n");
+                }
+                cuadroTexto.setText(contenido.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
     }//GEN-LAST:event_jMenu1ActionPerformed
-
+    int i = 1;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.out.println("Hola");
-        JScrollPane scroll = new JScrollPane();
-        JTextArea cuadro = new JTextArea(30, 41);
-        scroll.setViewportView(cuadro); // Use setViewportView to set the JTextArea as the view of the JScrollPane
-
+        /*Crear una nueva pestaña */
+        JScrollPane scrollPane = new JScrollPane();
+        JTextArea cuadroTexto = new JTextArea(30, 42);
+        scrollPane.setViewportView(cuadroTexto);
         JPanel panel = new JPanel();
-        panel.add(scroll); // Add the JScrollPane to the JPanel, not directly the JTextArea
-
-        Pestanas.addTab("Nuevo", panel);
+        panel.add(scrollPane);
+        panel.setName(String.valueOf(i));
+        cargarArchivo(".df",cuadroTexto);
+        Pestanas.addTab(String.valueOf(i), panel);
+        i++;
+        
 
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void PestanasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PestanasStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PestanasStateChanged
 
     /**
      * @param args the command line arguments

@@ -69,7 +69,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="Pestanas" min="-2" pref="491" max="-2" attributes="0"/>
-              <EmptySpace pref="808" max="32767" attributes="0"/>
+              <EmptySpace pref="811" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,14 +77,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="Pestanas" min="-2" pref="526" max="-2" attributes="0"/>
-              <EmptySpace pref="341" max="32767" attributes="0"/>
+              <Component id="Pestanas" min="-2" pref="530" max="-2" attributes="0"/>
+              <EmptySpace pref="340" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="Pestanas">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="PestanasStateChanged"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
     </Container>
