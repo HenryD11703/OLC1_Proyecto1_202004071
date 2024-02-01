@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package olc1_proyecto1_202004071;
+package com.mycompany.proyecto1;
 
 import java.awt.Color;
 import java.awt.Component;
