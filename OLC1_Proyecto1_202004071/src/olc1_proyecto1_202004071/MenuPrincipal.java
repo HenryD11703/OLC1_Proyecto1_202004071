@@ -4,13 +4,16 @@
  */
 package olc1_proyecto1_202004071;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,6 +31,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        getContentPane().setBackground(new Color(250, 250, 250));
     }
 
     /**
@@ -41,13 +45,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         Pestanas = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Consola = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -59,49 +64,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(29, 85, 227));
+        setForeground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
 
-        Pestanas.setBackground(new java.awt.Color(255, 255, 255));
-        Pestanas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Pestanas.setBackground(new java.awt.Color(250, 250, 250));
         Pestanas.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 PestanasStateChanged(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        Consola.setBackground(new java.awt.Color(33, 104, 166));
+        Consola.setColumns(20);
+        Consola.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        Consola.setForeground(new java.awt.Color(250, 250, 250));
+        Consola.setRows(5);
+        Consola.setBorder(null);
+        jScrollPane1.setViewportView(Consola);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setForeground(new java.awt.Color(250, 250, 250));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 102));
+        jButton3.setBackground(new java.awt.Color(50, 167, 226));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("<");
+        jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
+        jButton2.setBackground(new java.awt.Color(50, 167, 226));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText(">");
+        jButton2.setBorder(null);
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuBar1.setForeground(new java.awt.Color(201, 218, 187));
 
         jMenu1.setText("Archivo");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +127,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem8.setText("Guardar");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem8);
 
         jMenuBar1.add(jMenu1);
 
@@ -192,18 +210,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Pestanas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Pestanas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -234,6 +252,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
 
+    private void guardarArchivo(String extension, JTextArea cuadroTexto) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos " + extension, extension));
+
+        int resultado = fileChooser.showSaveDialog(this);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            try (FileWriter writer = new FileWriter(archivo.getAbsolutePath() + "." + extension)) {
+                writer.write(cuadroTexto.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
     }//GEN-LAST:event_jMenu1ActionPerformed
@@ -241,8 +274,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         /*Crear una nueva pestaña */
         JScrollPane scrollPane = new JScrollPane();
-        JTextArea cuadroTexto = new JTextArea(24, 42);
+        JTextArea cuadroTexto = new JTextArea(25, 42);
         scrollPane.setViewportView(cuadroTexto);
+
         JPanel panel = new JPanel();
         panel.add(scrollPane);
         panel.setName(String.valueOf(i));
@@ -274,10 +308,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 // Obtener el texto del JTextArea
                 String texto = cuadroTexto.getText();
                 System.out.println(texto);
+                Consola.setText(texto);
                 //Procesar este texto para analizar
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");
+            JOptionPane.showMessageDialog(rootPane, "No hay pestañas abiertas");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -287,6 +323,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Pestanas.remove(indicePestaña);
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");
+            JOptionPane.showMessageDialog(rootPane, "No hay pestañas abiertas");
         }
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -310,6 +347,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        int indicePestanaSeleccionada = Pestanas.getSelectedIndex();
+
+        // Obtener el panel asociado a la pestaña seleccionada
+        Component componente = Pestanas.getComponentAt(indicePestanaSeleccionada);
+
+        // Verificar si el componente es un JPanel
+        if (componente instanceof JPanel) {
+            // Obtener el JScrollPane dentro del JPanel
+            JScrollPane scrollPane = (JScrollPane) ((JPanel) componente).getComponent(0);
+
+            // Obtener el JTextArea dentro del JScrollPane
+            JTextArea cuadroTexto = (JTextArea) scrollPane.getViewport().getView();
+
+            // Llamar a la función para guardar el archivo
+            guardarArchivo("df", cuadroTexto);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,6 +403,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Consola;
     private javax.swing.JTabbedPane Pestanas;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -362,8 +419,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
