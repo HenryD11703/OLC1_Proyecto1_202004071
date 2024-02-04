@@ -6,7 +6,6 @@ package com.mycompany.proyecto1;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
