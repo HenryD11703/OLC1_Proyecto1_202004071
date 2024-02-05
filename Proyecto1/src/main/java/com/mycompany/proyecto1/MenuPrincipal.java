@@ -4,8 +4,7 @@
  */
 package com.mycompany.proyecto1;
 
-import Analizadores.AnalizadorLexico;
-import Analizadores.analisis_sintactico;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.io.BufferedReader;
@@ -312,16 +311,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 System.out.println(texto);
                 Consola.setText(texto);
                 
-                AnalizadorLexico lexico = new AnalizadorLexico(new BufferedReader(new StringReader(texto)));
-                analisis_sintactico sintactico = new analisis_sintactico(lexico);
-                
-                try{
-                    sintactico.parse();
-                    Consola.setText(sintactico.resultado);
-                }catch(Exception e){
-                
-                }
-                
+
                 
                 
                 //Procesar este texto para analizar
