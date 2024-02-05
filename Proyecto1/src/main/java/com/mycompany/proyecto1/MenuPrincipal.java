@@ -4,6 +4,8 @@
  */
 package com.mycompany.proyecto1;
 
+import Analizadores.AnalizadorLexico;
+import Analizadores.analisis_sintactico;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.BufferedReader;
@@ -11,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -308,6 +311,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 String texto = cuadroTexto.getText();
                 System.out.println(texto);
                 Consola.setText(texto);
+                
+                AnalizadorLexico lexico = new AnalizadorLexico(new BufferedReader(new StringReader(texto)));
+                analisis_sintactico sintactico = new analisis_sintactico(lexico);
+                
+                try{
+                    sintactico.parse();
+                    Consola.setText(sintactico.resultado);
+                }catch(Exception e){
+                
+                }
+                
+                
+                
                 //Procesar este texto para analizar
             }
         } catch (Exception e) {
