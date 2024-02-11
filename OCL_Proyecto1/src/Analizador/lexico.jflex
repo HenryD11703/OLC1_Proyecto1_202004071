@@ -116,19 +116,23 @@ TK_LABEL = "label"
 <YYINITIAL> {TK_VALUES}    {return new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext());}
 <YYINITIAL> {TK_LABEL}    {return new Symbol(sym.TK_label,yyline,yycolumn,yytext());}
 
-<YYINITIAL> {MENOR}      {return new Symbol(sym.MENOR,yyline,yycolumn,yytext());}
-<YYINITIAL> {MAYOR}      {return new Symbol(sym.MAYOR,yyline,yycolumn,yytext());}
-<YYINITIAL> {LLAVE1}     {return new Symbol(sym.LLAVE1,yyline,yycolumn,yytext());}
-<YYINITIAL> {LLAVE2}     {return new Symbol(sym.LLAVE2,yyline,yycolumn,yytext());}
-<YYINITIAL> {PAR1}       {return new Symbol(sym.PAR1,yyline,yycolumn,yytext());}
-<YYINITIAL> {PAR2}       {return new Symbol(sym.PAR2,yyline,yycolumn,yytext());}
-<YYINITIAL> {DIV}        {return new Symbol(sym.DIV,yyline,yycolumn,yytext());}
-<YYINITIAL> {PUNTO}      {return new Symbol(sym.PUNTO,yyline,yycolumn,yytext());}
-<YYINITIAL> {ENTEROS}    {return new Symbol(sym.ENTEROS,yyline,yycolumn,yytext());}
-<YYINITIAL> {FINCADENA}    {return new Symbol(sym.FINCADENA,yyline,yycolumn,yytext());}
-<YYINITIAL> {COMA}    {return new Symbol(sym.COMA,yyline,yycolumn,yytext());}
+<YYINITIAL> {DOSP}      {return new Symbol(sym.DOSP,yyline,yycolumn,yytext());}
+<YYINITIAL> {MENORQ}    {return new Symbol(sym.MENORQ,yyline,yycolumn,yytext());}
+<YYINITIAL> {MAYORQ}    {return new Symbol(sym.MAYORQ,yyline,yycolumn,yytext());}
+<YYINITIAL> {PYCOMA}    {return new Symbol(sym.PYCOMA,yyline,yycolumn,yytext());}
+<YYINITIAL> {COMEN}     {return new Symbol(sym.COMEN,yyline,yycolumn,yytext());}
+<YYINITIAL> {CORA}      {return new Symbol(sym.CORA,yyline,yycolumn,yytext());}
+<YYINITIAL> {CORC}      {return new Symbol(sym.CORC,yyline,yycolumn,yytext());}
+<YYINITIAL> {ARRB}      {return new Symbol(sym.ARRB,yyline,yycolumn,yytext());}
+<YYINITIAL> {PARA}      {return new Symbol(sym.PARA,yyline,yycolumn,yytext());}
+<YYINITIAL> {PARC}      {return new Symbol(sym.PARC,yyline,yycolumn,yytext());}
+<YYINITIAL> {COMA}      {return new Symbol(sym.COMA,yyline,yycolumn,yytext());}
+<YYINITIAL> {IGUAL}     {return new Symbol(sym.IGUAL,yyline,yycolumn,yytext());}
+<YYINITIAL> {NOMBRES}   {return new Symbol(sym.NOMBRES,yyline,yycolumn,yytext());}
+<YYINITIAL> {ENTEROS}   {return new Symbol(sym.ENTEROS,yyline,yycolumn,yytext());}
+<YYINITIAL> {DECIMAL}   {return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext());}
+<YYINITIAL> {ESPACIOS}  {}
 
-<YYINITIAL> {BLANCOS}    {}
 
 <YYINITIAL> [\"]         {yybegin(CADENA);cadena="";}
 
