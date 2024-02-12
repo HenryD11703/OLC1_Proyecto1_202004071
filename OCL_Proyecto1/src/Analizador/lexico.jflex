@@ -141,6 +141,11 @@ TK_LABEL = "label"
 {COMENTARIOS} {}
 {COMENMULTI} {}
 
+.       {
+            System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
+            yycolumn++;
+        }
+
 
 
 
