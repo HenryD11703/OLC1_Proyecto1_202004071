@@ -21,6 +21,7 @@ import java_cup.runtime.Symbol;
 %public
 %line
 %char
+%unicode
 %column
 %ignorecase // para que no sea sensible a mayusculas y minusculas
 
@@ -39,8 +40,8 @@ PARC = ")"
 COMA =","
 IGUAL = "="
 MENOS = "-"
-ESPACIOS = [\ \r\t\f\n]+
-NOMBRES = [a-zA-Z_][a-zA-Z0-9_]* // para que acepte nombres de variables
+ESPACIOS = [\ \r\t\f\t\n]+ // para que ignore los espacios
+NOMBRES = [a-zA-Z][a-zA-Z0-9_]* // para que acepte nombres de variables
 ENTEROS = [0-9]+
 STRINGT = [\"][^\"\n]+[\"] // para que acepte cadenas de texto dentro de comillas
 DECIMAL = [0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
