@@ -4,7 +4,8 @@
  */
 package ocl_proyecto1;
 
-
+import Analizador.Scanner;
+import Analizador.parser;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.BufferedReader;
@@ -13,6 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java_cup.runtime.Symbol;
+import java_cup.sym;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -310,11 +313,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 String texto = cuadroTexto.getText();
                 System.out.println(texto);
                 Consola.setText(texto);
+                Scanner scanner = new Scanner(new BufferedReader(new StringReader(texto)));
+                parser Parser = new parser(scanner);
+                Parser.parse();
+               
                 
-
-                
-                
-                //Procesar este texto para analizar
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");

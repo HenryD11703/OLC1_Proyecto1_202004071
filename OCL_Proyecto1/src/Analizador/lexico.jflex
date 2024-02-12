@@ -7,7 +7,7 @@ import java_cup.runtime.Symbol;
 
 // codigo de usuario
 %{
-    String cadena = "";
+
 %}
 
 %init{ 
@@ -22,7 +22,6 @@ import java_cup.runtime.Symbol;
 %line
 %char
 %column
-%full // para que no se pierda la informacion de la columna
 %ignorecase // para que no sea sensible a mayusculas y minusculas
 
 %state CADENA
@@ -40,24 +39,21 @@ PARC = ")"
 COMA =","
 IGUAL = "="
 MENOS = "-"
-ESPACIOS = [\r\t\n]+ // para que ignore los espacios
+ESPACIOS = [\ \r\t\f\n]+
 NOMBRES = [a-zA-Z_][a-zA-Z0-9_]* // para que acepte nombres de variables
 ENTEROS = [0-9]+
-DECIMAL = [0-9]+("."[  |0-9]+)?
-STRINGT = "\""[^\n]*"\"" // para que acepte cadenas de texto dentro de comillas
+STRINGT = [\"][^\"\n]+[\"] // para que acepte cadenas de texto dentro de comillas
+DECIMAL = [0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
 // para que reconozca comentarios de una linea que empiecen con !
-COMENTARIOS = "!"[^\n]*
+COMENTARIOS = "!"([^\r\n]*)
 
 // para que reconozca comentarios que empiezan con <! y terminan con !>
-COMENMULTI = "<!"[^\n]*"!>"
-
-
+COMENMULTI = "<![^!]*!>"
 
 
 
 // palabras reservadas
 TK_PROGRAM = "program"
-TK_ENDPROGRAM = "end program"
 TK_VAR = "var"
 TK_CADENA = "double"
 TK_CHAR = "char[]"
@@ -92,7 +88,6 @@ TK_LABEL = "label"
 
 %% //creacion de los tokens
 {TK_PROGRAM}    {return new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext());}
-{TK_ENDPROGRAM}    {return new Symbol(sym.TK_ENDPROGRAM,yyline,yycolumn,yytext());}
 {TK_VAR}    {return new Symbol(sym.TK_VAR,yyline,yycolumn,yytext());}
 {TK_CADENA}    {return new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext());}
 {TK_CHAR}    {return new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext());}
@@ -123,8 +118,8 @@ TK_LABEL = "label"
 {TK_TITULOY}    {return new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext());}
 {TK_EXEC}    {return new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext());}
 {TK_VALUES}    {return new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext());}
-{TK_LABEL}    {return new Symbol(sym.TK_label,yyline,yycolumn,yytext());}
-{STRINGT}    {return new Symbol(sym.STRING,yyline,yycolumn,yytext());}
+{TK_LABEL}    {return new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext());}
+{STRINGT}    {return new Symbol(sym.STRINGT,yyline,yycolumn,yytext());}
 
 {DOSP}      {return new Symbol(sym.DOSP,yyline,yycolumn,yytext());}
 {MENOS}     {return new Symbol(sym.MENOS,yyline,yycolumn,yytext());}
@@ -139,8 +134,8 @@ TK_LABEL = "label"
 {COMA}      {return new Symbol(sym.COMA,yyline,yycolumn,yytext());}
 {IGUAL}     {return new Symbol(sym.IGUAL,yyline,yycolumn,yytext());}
 {NOMBRES}   {return new Symbol(sym.NOMBRES,yyline,yycolumn,yytext());}
-{DECIMAL}   {return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext());}
 {ENTEROS}   {return new Symbol(sym.ENTEROS,yyline,yycolumn,yytext());}
+{DECIMAL}   {return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext());}
 {ESPACIOS}  {}
 {COMENTARIOS} {}
 {COMENMULTI} {}
