@@ -47,9 +47,9 @@ STRINGT = [\"][^\"\n]+[\"] // para que acepte cadenas de texto dentro de comilla
 DECIMAL = [0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
 // para que reconozca comentarios de una linea que empiecen con !
 COMENTARIOS = "!"([^\r\n]*)
+// para que reconozca comentarios de varias lineas dentro de <! y !>
+COMENMULTI = "<!"([^!]|"!"[^>])*"!>"
 
-// para que reconozca comentarios que empiezan con <! y terminan con !>
-COMENMULTI = "<![^!]*!>"
 
 
 
@@ -140,6 +140,7 @@ TK_LABEL = "label"
 {ESPACIOS}  {}
 {COMENTARIOS} {}
 {COMENMULTI} {}
+
 
 .       {
             System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
