@@ -4,10 +4,6 @@
  */
 package Analizador;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jflex.exceptions.SilentExit;
-
 /**
  *
  * @author henry
@@ -20,17 +16,18 @@ public class Generador {
     public static void main(String[] args) {
         Generar();
     }
-    public static void Generar(){
+
+    public static void Generar() {
         try {
-            String ruta="src/Analizador/";
-            String Flex[] = {ruta + "lexico.jflex","-d",ruta};
+            String ruta = "src/Analizador/";
+            String[] Flex = {ruta + "lexico.jflex", "-d", ruta};
             jflex.Main.generate(Flex);
-            String Cup[] = {"-destdir", ruta,"-parser","parser",ruta+"sintactico.cup"};
+            String[] Cup = {"-destdir", ruta,"-parser","parser",ruta+"sintactico.cup"};
             java_cup.Main.main(Cup);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
 }
