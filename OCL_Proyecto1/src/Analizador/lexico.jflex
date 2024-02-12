@@ -88,58 +88,60 @@ TK_VALUES = "values"
 TK_LABEL = "label"
 
 %% //creacion de los tokens
-{TK_PROGRAM}    {return new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext());}
-{TK_VAR}    {return new Symbol(sym.TK_VAR,yyline,yycolumn,yytext());}
-{TK_CADENA}    {return new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext());}
-{TK_CHAR}    {return new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext());}
-{TK_END}    {return new Symbol(sym.TK_END,yyline,yycolumn,yytext());}
-{TK_ARR}    {return new Symbol(sym.TK_ARR,yyline,yycolumn,yytext());}
-{TK_SUM}    {return new Symbol(sym.TK_SUM,yyline,yycolumn,yytext());}
-{TK_RES}    {return new Symbol(sym.TK_RES,yyline,yycolumn,yytext());}
-{TK_MUL}    {return new Symbol(sym.TK_MUL,yyline,yycolumn,yytext());}
-{TK_DIV}    {return new Symbol(sym.TK_DIV,yyline,yycolumn,yytext());}
-{TK_MOD}    {return new Symbol(sym.TK_MOD,yyline,yycolumn,yytext());}
-{TK_MEDIA}    {return new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext());}
-{TK_MEDIANA}    {return new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext());}
-{TK_MODA}    {return new Symbol(sym.TK_MODA,yyline,yycolumn,yytext());}
-{TK_VARIANZA}    {return new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext());}
-{TK_MAX}    {return new Symbol(sym.TK_MAX,yyline,yycolumn,yytext());}
-{TK_MIN}    {return new Symbol(sym.TK_MIN,yyline,yycolumn,yytext());}
-{TK_CONSOLE}    {return new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext());}
-{TK_PRINT}    {return new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext());}
-{TK_COLUMN}    {return new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext());}
-{TK_GRAPHBAR}    {return new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext());}
-{TK_GRAPHPIE}    {return new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext());}
-{TK_GRAPHLINE}    {return new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext());}
-{TK_HISTOGRAM}    {return new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext());}
-{TK_TITULO}    {return new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext());}
-{TK_EJEX}    {return new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext());}
-{TK_EJEY}    {return new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext());}
-{TK_TITULOX}    {return new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext());}
-{TK_TITULOY}    {return new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext());}
-{TK_EXEC}    {return new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext());}
-{TK_VALUES}    {return new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext());}
-{TK_LABEL}    {return new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext());}
-{STRINGT}    {return new Symbol(sym.STRINGT,yyline,yycolumn,yytext());}
+{TK_PROGRAM}    {Symbol symbol = new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_VAR}        {Symbol symbol = new Symbol(sym.TK_VAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_CADENA}     {Symbol symbol = new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_CHAR}       {Symbol symbol = new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_END}        {Symbol symbol = new Symbol(sym.TK_END,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_ARR}        {Symbol symbol = new Symbol(sym.TK_ARR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_SUM}        {Symbol symbol = new Symbol(sym.TK_SUM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_RES}        {Symbol symbol = new Symbol(sym.TK_RES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MUL}        {Symbol symbol = new Symbol(sym.TK_MUL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_DIV}        {Symbol symbol = new Symbol(sym.TK_DIV,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MOD}        {Symbol symbol = new Symbol(sym.TK_MOD,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MEDIA}      {Symbol symbol = new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MEDIANA}    {Symbol symbol = new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MODA}       {Symbol symbol = new Symbol(sym.TK_MODA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_VARIANZA}   {Symbol symbol = new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MAX}        {Symbol symbol = new Symbol(sym.TK_MAX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_MIN}        {Symbol symbol = new Symbol(sym.TK_MIN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_CONSOLE}    {Symbol symbol = new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_PRINT}      {Symbol symbol = new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_COLUMN}     {Symbol symbol = new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_GRAPHBAR}   {Symbol symbol = new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_GRAPHPIE}   {Symbol symbol = new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_GRAPHLINE}  {Symbol symbol = new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_HISTOGRAM}  {Symbol symbol = new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_TITULO}     {Symbol symbol = new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_EJEX}       {Symbol symbol = new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_EJEY}       {Symbol symbol = new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_TITULOX}    {Symbol symbol = new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_TITULOY}    {Symbol symbol = new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_EXEC}       {Symbol symbol = new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_VALUES}     {Symbol symbol = new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{TK_LABEL}      {Symbol symbol = new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
 
-{DOSP}      {return new Symbol(sym.DOSP,yyline,yycolumn,yytext());}
-{MENOS}     {return new Symbol(sym.MENOS,yyline,yycolumn,yytext());}
-{MENORQ}    {return new Symbol(sym.MENORQ,yyline,yycolumn,yytext());}
-{MAYORQ}    {return new Symbol(sym.MAYORQ,yyline,yycolumn,yytext());}
-{PYCOMA}    {return new Symbol(sym.PYCOMA,yyline,yycolumn,yytext());}
-{CORA}      {return new Symbol(sym.CORA,yyline,yycolumn,yytext());}
-{CORC}      {return new Symbol(sym.CORC,yyline,yycolumn,yytext());}
-{ARRB}      {return new Symbol(sym.ARRB,yyline,yycolumn,yytext());}
-{PARA}      {return new Symbol(sym.PARA,yyline,yycolumn,yytext());}
-{PARC}      {return new Symbol(sym.PARC,yyline,yycolumn,yytext());}
-{COMA}      {return new Symbol(sym.COMA,yyline,yycolumn,yytext());}
-{IGUAL}     {return new Symbol(sym.IGUAL,yyline,yycolumn,yytext());}
-{NOMBRES}   {return new Symbol(sym.NOMBRES,yyline,yycolumn,yytext());}
-{ENTEROS}   {return new Symbol(sym.ENTEROS,yyline,yycolumn,yytext());}
-{DECIMAL}   {return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext());}
-{ESPACIOS}  {}
-{COMENTARIOS} {}
-{COMENMULTI} {}
+{DOSP}          {Symbol symbol = new Symbol(sym.DOSP,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{MENORQ}        {Symbol symbol = new Symbol(sym.MENORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{MAYORQ}        {Symbol symbol = new Symbol(sym.MAYORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{PYCOMA}        {Symbol symbol = new Symbol(sym.PYCOMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{CORA}          {Symbol symbol = new Symbol(sym.CORA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{CORC}          {Symbol symbol = new Symbol(sym.CORC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{ARRB}          {Symbol symbol = new Symbol(sym.ARRB,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{PARA}          {Symbol symbol = new Symbol(sym.PARA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{PARC}          {Symbol symbol = new Symbol(sym.PARC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{COMA}          {Symbol symbol = new Symbol(sym.COMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{IGUAL}         {Symbol symbol = new Symbol(sym.IGUAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{MENOS}         {Symbol symbol = new Symbol(sym.MENOS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{ESPACIOS}      {}
+{NOMBRES}       {Symbol symbol = new Symbol(sym.NOMBRES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{ENTEROS}       {Symbol symbol = new Symbol(sym.ENTEROS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{STRINGT}       {Symbol symbol = new Symbol(sym.STRINGT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{DECIMAL}       {Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+{COMENTARIOS}   {}
+{COMENMULTI}    {}
+
+
 
 
 .       {

@@ -887,242 +887,242 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 52: break;
           case 3:
-            { return new Symbol(sym.PARA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.PARA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 53: break;
           case 4:
-            { return new Symbol(sym.PARC,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.PARC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 54: break;
           case 5:
-            { return new Symbol(sym.COMA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.COMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 55: break;
           case 6:
-            { return new Symbol(sym.MENOS,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.MENOS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 56: break;
           case 7:
-            { return new Symbol(sym.ENTEROS,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.ENTEROS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 57: break;
           case 8:
-            { return new Symbol(sym.DOSP,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.DOSP,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 58: break;
           case 9:
-            { return new Symbol(sym.PYCOMA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.PYCOMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 59: break;
           case 10:
-            { return new Symbol(sym.MENORQ,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.MENORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 60: break;
           case 11:
-            { return new Symbol(sym.IGUAL,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.IGUAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 61: break;
           case 12:
-            { return new Symbol(sym.MAYORQ,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.MAYORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 62: break;
           case 13:
-            { return new Symbol(sym.ARRB,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.ARRB,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 63: break;
           case 14:
-            { return new Symbol(sym.NOMBRES,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.NOMBRES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 64: break;
           case 15:
-            { return new Symbol(sym.CORA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.CORA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 65: break;
           case 16:
-            { return new Symbol(sym.CORC,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.CORC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 66: break;
           case 17:
-            { return new Symbol(sym.STRINGT,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.STRINGT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 67: break;
           case 18:
-            { return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 68: break;
           case 19:
-            { return new Symbol(sym.TK_ARR,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_ARR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 69: break;
           case 20:
-            { return new Symbol(sym.TK_DIV,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_DIV,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 70: break;
           case 21:
-            { return new Symbol(sym.TK_END,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_END,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 71: break;
           case 22:
-            { return new Symbol(sym.TK_MAX,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MAX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 72: break;
           case 23:
-            { return new Symbol(sym.TK_MIN,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MIN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 73: break;
           case 24:
-            { return new Symbol(sym.TK_MOD,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MOD,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 74: break;
           case 25:
-            { return new Symbol(sym.TK_MUL,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MUL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 75: break;
           case 26:
-            { return new Symbol(sym.TK_RES,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_RES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 76: break;
           case 27:
-            { return new Symbol(sym.TK_SUM,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_SUM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 77: break;
           case 28:
-            { return new Symbol(sym.TK_VAR,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_VAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 78: break;
           case 29:
-            { return new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 79: break;
           case 30:
-            { return new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 80: break;
           case 31:
-            { return new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 81: break;
           case 32:
-            { return new Symbol(sym.TK_MODA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MODA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 82: break;
           case 33:
-            { return new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 83: break;
           case 34:
-            { return new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 84: break;
           case 35:
-            { return new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 85: break;
           case 36:
-            { return new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 86: break;
           case 37:
-            { return new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 87: break;
           case 38:
-            { return new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 88: break;
           case 39:
-            { return new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 89: break;
           case 40:
-            { return new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 90: break;
           case 41:
-            { return new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 91: break;
           case 42:
-            { return new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 92: break;
           case 43:
-            { return new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 93: break;
           case 44:
-            { return new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 94: break;
           case 45:
-            { return new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 95: break;
           case 46:
-            { return new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 96: break;
           case 47:
-            { return new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 97: break;
           case 48:
-            { return new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 98: break;
           case 49:
-            { return new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 99: break;
           case 50:
-            { return new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext());
+            { Symbol symbol = new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
             }
           // fall through
           case 100: break;
