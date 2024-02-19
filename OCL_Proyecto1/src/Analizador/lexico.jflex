@@ -42,9 +42,9 @@ IGUAL = "="
 MENOS = "-"
 ESPACIOS = [\ \r\t\f\t\n]+ // para que ignore los espacios
 NOMBRES = [a-zA-Z][a-zA-Z0-9_]* // para que acepte nombres de variables
-ENTEROS = [0-9]+
+ENTEROS = [-+]?[0-9]+
 STRINGT = [\"][^\"\n]+[\"] // para que acepte cadenas de texto dentro de comillas
-DECIMAL = [0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
+DECIMAL = [-+]?[0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
 // para que reconozca comentarios de una linea que empiecen con !
 COMENTARIOS = "!"([^\r\n]*)
 // para que reconozca comentarios de varias lineas dentro de <! y !>
@@ -78,6 +78,9 @@ TK_GRAPHBAR = "graphbar"
 TK_GRAPHPIE = "graphpie"
 TK_GRAPHLINE = "graphline"
 TK_HISTOGRAM = "histogram"
+
+
+
 TK_TITULO = "titulo"
 TK_EJEX = "ejex"
 TK_EJEY = "ejey"

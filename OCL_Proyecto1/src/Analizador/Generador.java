@@ -22,7 +22,7 @@ public class Generador {
             String ruta = "src/Analizador/";
             String[] Flex = {ruta + "lexico.jflex", "-d", ruta};
             jflex.Main.generate(Flex);
-            String[] Cup = {"-destdir", ruta,"-parser","parser",ruta+"sintactico.cup"};
+            String[] Cup = {"-destdir", ruta, "-parser", "parser", ruta + "sintactico.cup"};
             java_cup.Main.main(Cup);
         } catch (Exception e) {
             e.printStackTrace();
