@@ -31,7 +31,7 @@ terminal String ENTEROS, DECIMAL, STRINGT, NOMBRES;
 
 
 nonterminal INICIO, CODIGO, OTROCODIGO, VARIABLE, ARREGLO, IDARREGLO, LISTA_VALORES;
-nonterminal OTRA_EXPRESION, TIPO, EXPRESION, OPERACION, TIPOOPERACION, ESTADISTICA, DATOS, TIPOESTADISTICA;
+nonterminal OTRA_EXPRESION, TIPO, EXPRESION, OPERACION, ESTADISTICA, DATOS, TIPOESTADISTICA;
 nonterminal IMPRESION, TIPOIMPRESION, ARREGLOIMP, GRAFICA, TIPOGRAPH, INSTRUCCION, TIPOINSTRUCCION, OTRAINSTRUCCION;
 nonterminal EXPRESIONGRAPH;
 
@@ -53,6 +53,7 @@ OTROCODIGO ::= CODIGO OTROCODIGO
 VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e TK_END PYCOMA
 {:
     codigoUsr+="\n"+"Variable: Tipo: "+t+"    Nombre:  "+n+" = "+e+";";
+    System.out.println(codigoUsr);
 :};
 
 ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
@@ -84,13 +85,36 @@ EXPRESION ::= ENTEROS:eE {: RESULT=eE; :}
              | IDARREGLO:Ei {: RESULT=Ei; :} 
              | ESTADISTICA: Ees {: RESULT=Ees; :};
 
-OPERACION ::= TIPOOPERACION PARA EXPRESION COMA EXPRESION PARC;
-
-TIPOOPERACION ::= TK_SUM 
-                | TK_RES 
-                | TK_MUL 
-                | TK_DIV 
-                | TK_MOD;
+OPERACION ::=     TK_SUM PARA EXPRESION:ns1 COMA EXPRESION:ns2 PARC
+                  {: 
+                    double n1 = Double.parseDouble(ns1.toString());
+                    double n2 = Double.parseDouble(ns2.toString());
+                    RESULT = n1 + n2;
+                  :}
+                | TK_RES PARA EXPRESION:nr1 COMA EXPRESION:nr2 PARC
+                    {: 
+                        double n1 = Double.parseDouble(nr1.toString());
+                        double n2 = Double.parseDouble(nr2.toString());
+                        RESULT = n1 - n2;
+                    :}
+                | TK_MUL PARA EXPRESION:nm1 COMA EXPRESION:nm2 PARC
+                    {: 
+                        double n1 = Double.parseDouble(nm1.toString());
+                        double n2 = Double.parseDouble(nm2.toString());
+                        RESULT = n1 * n2;
+                    :}
+                | TK_DIV PARA EXPRESION:nd1 COMA EXPRESION:nd2 PARC
+                    {: 
+                        double n1 = Double.parseDouble(nd1.toString());
+                        double n2 = Double.parseDouble(nd2.toString());
+                        RESULT = n1 / n2;
+                    :}
+                | TK_MOD PARA EXPRESION:mn1 COMA EXPRESION:mn2 PARC
+                    {: 
+                        double n1 = Double.parseDouble(mn1.toString());
+                        double n2 = Double.parseDouble(mn2.toString());
+                        RESULT = n1 % n2;
+                    :};
 
 ESTADISTICA ::= TIPOESTADISTICA PARA DATOS PARC;
 
