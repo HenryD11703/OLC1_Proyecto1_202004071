@@ -2,11 +2,24 @@ package Analizador;
 //importaciones si fuese necesario
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.ArrayList;
+
 
 //codigo de la clase parser
+//
+//data.put("myKey", new HashMap<Integer, Integer>());
+
+//declarar el hashmap con valores de tipo
+// Int para el numero de la tabla
+// String para guardar el tipo de dato
+// String para el nombre del dato
+// Hasmap de tipo string , tipo hashmap 
+
+
 parser code 
 {:
-    
+    HashMap<Object,Object> data = new HashMap<>(); 
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
@@ -47,19 +60,22 @@ CODIGO ::= VARIABLE
           | IMPRESION 
           | GRAFICA ;
 
-OTROCODIGO ::= CODIGO OTROCODIGO 
+OTROCODIGO ::= OTROCODIGO CODIGO
             | /* vacio */; 
 
-VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e TK_END PYCOMA
+VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA
 {:
-    codigoUsr+="\n"+"Variable: Tipo: "+t+"    Nombre:  "+n+" = "+e+";";
-    System.out.println(codigoUsr);
+
+    data.put(n.toString(), e);
+    for (Object clave : data.keySet()) {
+        System.out.println("Clave: " + clave.toString() + " |    Valor: " + data.get(clave).toString());
+    }
 :};
 
 ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
-    codigoUsr+="\n"+"Arreglo:  Tipo: "+At+"    Nombre: "+Ai+" = "+Av+";";
-    System.out.println(codigoUsr);
+    ArrayList<Object> arreglo = new ArrayList<>();
+    data.put(Ai, arreglo);
 :};
 
 TIPO ::= TK_CHAR {: RESULT = "char[]"; :} 
@@ -71,19 +87,32 @@ IDARREGLO ::= ARRB NOMBRES:nombreA
 :}
 ;
 
-LISTA_VALORES ::= CORA EXPRESION:Le OTRA_EXPRESION:Loe CORC;
+LISTA_VALORES ::= CORA EXPRESION:Le OTRA_EXPRESION:Loe CORC
+{:
+    ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Loe);
+    arreglo.add(Le);
+:};
 
 
 OTRA_EXPRESION ::= COMA EXPRESION:Oe OTRA_EXPRESION 
-                | /* vacio */;
+                | /* vacio */
+                {:
+                //ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Oe);
+                //arreglo.add(Oe);
+                RESULT = Oe;
+                :};
 
-EXPRESION ::= ENTEROS:eE {: RESULT=eE; :} 
-             | DECIMAL:eD {: RESULT=eD; :} 
-             | STRINGT:Es {: RESULT=Es; :} 
-             | NOMBRES:En {: RESULT=En; :} 
-             | OPERACION:Eo {: RESULT=Eo; :} 
-             | IDARREGLO:Ei {: RESULT=Ei; :} 
-             | ESTADISTICA: Ees {: RESULT=Ees; :};
+EXPRESION ::= ENTEROS:E {: RESULT=E; :} 
+             | DECIMAL:E {: RESULT=E; :} 
+             | STRINGT:E {: RESULT=E; :} 
+             | NOMBRES:E {: 
+                            RESULT=data.get(E); 
+                         :} 
+             | OPERACION:E {: RESULT=E; :} 
+             | IDARREGLO:E {: //Para cuando sean arreglos guarlos y retornar el arreglo
+                           RESULT=data.get(E); 
+                            :} 
+             | ESTADISTICA: E {: RESULT=E; :};
 
 OPERACION ::=     TK_SUM PARA EXPRESION:ns1 COMA EXPRESION:ns2 PARC
                   {: 
@@ -156,7 +185,7 @@ TIPOINSTRUCCION ::= TK_VALUES
                     | TK_TITULOX 
                     | TK_TITULOY;
 
-OTRAINSTRUCCION ::= INSTRUCCION OTRAINSTRUCCION 
+OTRAINSTRUCCION ::= OTRAINSTRUCCION  INSTRUCCION 
                     | /* vacio */;
 
 
