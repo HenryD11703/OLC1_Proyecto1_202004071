@@ -9,6 +9,7 @@ import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -543,8 +544,8 @@ class CUP$parser$actions {
 		int Avright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		Object Av = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		
-    ArrayList<Object> arreglo = new ArrayList<>();
-    data.put(Ai, arreglo);
+    data.put(Ai, Av);
+    
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ARREGLO",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -593,8 +594,12 @@ class CUP$parser$actions {
 		int Loeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		Object Loe = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-    ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Loe);
-    arreglo.add(Le);
+    ArrayList<Object> lista = new ArrayList<>();
+    lista.add(Le);//este añade el primer valor que se obtiene
+    lista.addAll((Collection<? extends Object>) Loe); 
+    
+    RESULT = lista;
+    
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LISTA_VALORES",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -604,9 +609,21 @@ class CUP$parser$actions {
           case 17: // OTRA_EXPRESION ::= COMA EXPRESION OTRA_EXPRESION 
             {
               Object RESULT =null;
-		int Oeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
-		int Oeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object Oe = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int expleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int expright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object exp = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int otraexpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int otraexpright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object otraexp = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+    ArrayList<Object> lista;
+    if (otraexp == null) {
+        lista = new ArrayList<>();
+    } else {
+        lista = (ArrayList<Object>) otraexp;
+    }
+    lista.add(exp);
+    RESULT = lista;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OTRA_EXPRESION",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -617,10 +634,8 @@ class CUP$parser$actions {
             {
               Object RESULT =null;
 		
-                //ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Oe);
-                //arreglo.add(Oe);
-                RESULT = Oe;
-                
+    RESULT = new ArrayList<>();
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OTRA_EXPRESION",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

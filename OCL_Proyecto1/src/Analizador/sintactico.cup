@@ -74,8 +74,8 @@ VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: 
 
 ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
-    ArrayList<Object> arreglo = new ArrayList<>();
-    data.put(Ai, arreglo);
+    data.put(Ai, Av);
+    
 :};
 
 TIPO ::= TK_CHAR {: RESULT = "char[]"; :} 
@@ -89,19 +89,31 @@ IDARREGLO ::= ARRB NOMBRES:nombreA
 
 LISTA_VALORES ::= CORA EXPRESION:Le OTRA_EXPRESION:Loe CORC
 {:
-    ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Loe);
-    arreglo.add(Le);
+    ArrayList<Object> lista = new ArrayList<>();
+    lista.add(Le);//este añade el primer valor que se obtiene
+    lista.addAll((Collection<? extends Object>) Loe); //esto indica que Loe puede ser cualquier cosa que sea de tipo Object
+    
+    RESULT = lista;
+    
 :};
 
 
-OTRA_EXPRESION ::= COMA EXPRESION:Oe OTRA_EXPRESION 
-                | /* vacio */
-                {:
-                //ArrayList<Object> arreglo = (ArrayList<Object>) data.get(Oe);
-                //arreglo.add(Oe);
-                RESULT = Oe;
-                :};
-
+OTRA_EXPRESION ::= COMA EXPRESION:exp OTRA_EXPRESION:otraexp  
+               {:
+    ArrayList<Object> lista;
+    if (otraexp == null) {
+        lista = new ArrayList<>();
+    } else {
+        lista = (ArrayList<Object>) otraexp;
+    }
+    lista.add(exp);
+    RESULT = lista;
+:}
+| /* vacio */
+{:
+    RESULT = new ArrayList<>();
+:};
+                
 EXPRESION ::= ENTEROS:E {: RESULT=E; :} 
              | DECIMAL:E {: RESULT=E; :} 
              | STRINGT:E {: RESULT=E; :} 
