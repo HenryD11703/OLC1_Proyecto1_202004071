@@ -19,5 +19,6 @@ var:double :: modulo <- MOD(5, 4) end;
 var:double :: sumaf <- MUL( SUM(7,3) , RES(7, DIV(25,5))) end;
 var:double :: pruebaOP <- SUM(sumaf,SUM(numero,SUM(numero,suma))) end;
  
+ arr:double::@aPrueba2 <- [1,numero,numero,3,2,3,4,2,2,2,1,1,1,1,2,3,4,suma,3] end;
 
 end program

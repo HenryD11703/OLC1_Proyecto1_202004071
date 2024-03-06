@@ -4,6 +4,8 @@ import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collection;
+
 
 
 //codigo de la clase parser
@@ -44,9 +46,9 @@ terminal String ENTEROS, DECIMAL, STRINGT, NOMBRES;
 
 
 nonterminal INICIO, CODIGO, OTROCODIGO, VARIABLE, ARREGLO, IDARREGLO, LISTA_VALORES;
-nonterminal OTRA_EXPRESION, TIPO, EXPRESION, OPERACION, ESTADISTICA, DATOS, TIPOESTADISTICA;
+nonterminal OTRA_EXPRESION, TIPO, EXPRESION, OPERACION, ESTADISTICA, DATOS;
 nonterminal IMPRESION, TIPOIMPRESION, ARREGLOIMP, GRAFICA, TIPOGRAPH, INSTRUCCION, TIPOINSTRUCCION, OTRAINSTRUCCION;
-nonterminal EXPRESIONGRAPH;
+nonterminal EXPRESIONGRAPH, OTRAEXPRESIONIMP;
 
 
 start with INICIO;
@@ -75,6 +77,10 @@ VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: 
 ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
     data.put(Ai, Av);
+    ArrayList<Object> miLista = (ArrayList<Object>) data.get(Ai);
+    for(Object valor: miLista){
+        System.out.println("Valores para: "+Ai+" son:"+valor);
+    }
     
 :};
 
@@ -106,7 +112,7 @@ OTRA_EXPRESION ::= COMA EXPRESION:exp OTRA_EXPRESION:otraexp
     } else {
         lista = (ArrayList<Object>) otraexp;
     }
-    lista.add(exp);
+    lista.add(0,exp);
     RESULT = lista;
 :}
 | /* vacio */
@@ -157,25 +163,31 @@ OPERACION ::=     TK_SUM PARA EXPRESION:ns1 COMA EXPRESION:ns2 PARC
                         RESULT = n1 % n2;
                     :};
 
-ESTADISTICA ::= TIPOESTADISTICA PARA DATOS PARC;
+ESTADISTICA ::=  TK_MEDIA PARA DATOS:arrV PARC
+                {://recuperar los datos del arreglo arrV y usarlos para calcular
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                :}
+                |TK_MEDIANA PARA DATOS:arrV PARC
+                |TK_MODA PARA DATOS:arrV PARC
+                |TK_VARIANZA PARA DATOS:arrV PARC
+                |TK_MAX PARA DATOS:arrV PARC
+                |TK_MIN PARA DATOS:arrV PARC;
 
-TIPOESTADISTICA ::= TK_MEDIA 
-                  | TK_MEDIANA 
-                  | TK_MODA 
-                  | TK_VARIANZA 
-                  | TK_MAX 
-                  | TK_MIN;
-
-DATOS ::= IDARREGLO
-         | LISTA_VALORES;
+//Esta produccion siempre retornara un arreglo
+//asi que lo obtenido aca guardalo en un arreglo para su uso en operaciones o en impresiones
+DATOS ::= IDARREGLO:arrID {: RESULT=arrID; :}//como al buscar ID arreglo ya retorna un arrreglo en la palabra expresion solo retornar esto mismo
+         | LISTA_VALORES:lista {: RESULT=lista; :}
 
 IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA;
 
-TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION OTRA_EXPRESION 
+TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION OTRAEXPRESIONIMP 
                 | TK_COLUMN IGUAL EXPRESION MENOS MAYORQ ARREGLOIMP;
 
 ARREGLOIMP ::= IDARREGLO 
             | LISTA_VALORES;
+
+OTRAEXPRESIONIMP ::= COMA EXPRESION OTRAEXPRESIONIMP 
+                  | /* vacio */;
 
 GRAFICA ::= TIPOGRAPH PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;
 
