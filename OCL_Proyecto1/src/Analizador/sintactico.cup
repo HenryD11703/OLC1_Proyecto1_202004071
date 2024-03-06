@@ -8,6 +8,7 @@ import java.util.Collection;
 
 
 
+
 //codigo de la clase parser
 //
 //data.put("myKey", new HashMap<Integer, Integer>());
@@ -164,19 +165,103 @@ OPERACION ::=     TK_SUM PARA EXPRESION:ns1 COMA EXPRESION:ns2 PARC
                     :};
 
 ESTADISTICA ::=  TK_MEDIA PARA DATOS:arrV PARC
-                {://recuperar los datos del arreglo arrV y usarlos para calcular
+                {:
                     ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    double sum = 0;
+                    int count = 0;
+                    for (Object valor : datosC) {
+                            sum += Double.parseDouble(valor.toString());
+                            count++;
+                        
+                    }
+                    double media = sum / count ;
+                    RESULT = media;
                 :}
                 |TK_MEDIANA PARA DATOS:arrV PARC
+                {:
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    double mediana = 0;
+                    int size = datosC.size();
+                    if (size % 2 == 0) {
+                        mediana = (Double.parseDouble(datosC.get(size / 2 - 1).toString()) + Double.parseDouble(datosC.get(size / 2).toString())) / 2;
+                    } else {
+                        mediana = Double.parseDouble(datosC.get(size / 2).toString());
+                    }
+                    RESULT = mediana;
+                :}
                 |TK_MODA PARA DATOS:arrV PARC
+                {:
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    int maximoVeces = 0;
+                    double moda = 0;
+                    for (int i = 0; i < datosC.size(); i++) {
+                        int veces = 0;
+                        for (int j = 0; j < datosC.size(); j++) {
+                            if (datosC.get(i).equals(datosC.get(j))) {
+                                veces++;
+                            }
+                        }
+                        if (veces > maximoVeces) {
+                            moda = Double.parseDouble(datosC.get(i).toString());
+                            maximoVeces = veces;
+                        }
+                    }
+                    RESULT = moda;
+                :}
                 |TK_VARIANZA PARA DATOS:arrV PARC
+                {:
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    //para la varianza se necesita calcular la media aritmetica
+                    double sum = 0;
+                    for (Object valor : datosC) {
+                            sum += Double.parseDouble(valor.toString());                      
+                    }
+                    double media = sum / datosC.size() ;
+                    // por cada dato RESTAR este valor y elevar al cuadrado
+                    double SUMparentesisCuadrados = 0;
+                    for(Object valor: datosC){
+                        double par = Double.parseDouble(valor.toString()) - media;
+                        SUMparentesisCuadrados += par * par;
+                    }
+                    double varianza = SUMparentesisCuadrados /datosC.size();
+                    RESULT = varianza;
+                    
+
+                :}
+
                 |TK_MAX PARA DATOS:arrV PARC
-                |TK_MIN PARA DATOS:arrV PARC;
+                {:
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    Double maxV = Double.parseDouble(datosC.get(0).toString());
+                    for(Object obj:datosC){
+                    double num = Double.parseDouble(obj.toString());
+                    if(num > maxV){
+                        maxV = num;
+                    }
+                    }
+                    RESULT = maxV;
+                    
+                :}
+                |TK_MIN PARA DATOS:arrV PARC
+                {:
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    Double minV =  Double.parseDouble(datosC.get(0).toString());
+                    for(Object obj:datosC){
+                    double num = Double.parseDouble(obj.toString());
+                    if(num < minV){
+                        minV = num;
+                    }
+                    }
+                    RESULT = minV;
+                :};
 
 //Esta produccion siempre retornara un arreglo
 //asi que lo obtenido aca guardalo en un arreglo para su uso en operaciones o en impresiones
-DATOS ::= IDARREGLO:arrID {: RESULT=arrID; :}//como al buscar ID arreglo ya retorna un arrreglo en la palabra expresion solo retornar esto mismo
-         | LISTA_VALORES:lista {: RESULT=lista; :}
+DATOS ::= IDARREGLO:arrID {:
+        ArrayList<Object> datos = (ArrayList<Object>) data.get(arrID);
+        RESULT = datos;
+    :}
+         | LISTA_VALORES:lista {: RESULT=lista; :};//y aca se retorna un arreglo que proviene de la produccion de listaValores
 
 IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA;
 

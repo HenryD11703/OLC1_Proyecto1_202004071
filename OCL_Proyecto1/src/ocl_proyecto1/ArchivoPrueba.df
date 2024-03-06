@@ -6,7 +6,7 @@ E CONTENER LO QUE SEA -   Hasta estos simbolos " " / ! 12 4 ? Que no son validos
 var:double :: variable <- SUM(numero,numero) end;
 var:double :: copia <- numero end; ! copia tiene el valor 2.5 
 
- arr:double::@aPrueba <- [1,numero,numero,3] end;
+ arr:double::@aPrueba <- [1,MUL(numero,-1),2,numero,3] end;
  
 ! Operaciones
 var:double :: suma <- SUM(5, 2) end;
@@ -20,5 +20,31 @@ var:double :: sumaf <- MUL( SUM(7,3) , RES(7, DIV(25,5))) end;
 var:double :: pruebaOP <- SUM(sumaf,SUM(numero,SUM(numero,suma))) end;
  
  arr:double::@aPrueba2 <- [1,numero,numero,3,2,3,4,2,2,2,1,1,1,1,2,3,4,suma,3] end;
+
+var:double :: mediaC <-  media([1,2,3]) end;
+var:double :: media2C <-  media(@aPrueba2) end;
+
+var:double:: medianaPrueb <- mediana([mediaC,2,media2C,5,numero]) end;
+var:double :: mediana2 <- mediana(@aPrueba) end;
+var:double:: modaaS <- moda(@aPrueba2) end;
+var:double :: modaLV <- moda([1,2,3,4,5,6,1,2,2]) end;
+var:double:: sumaEst <- SUM(moda(@aPrueba2),mediana(@aPrueba)) end;
+
+! Nested operations with statistical functions
+var:double :: nestedMedia <- SUM(media([1,2,3]), media(@aPrueba2)) end;
+var:double :: nestedMediana <- RES(mediana([mediaC,2,media2C,5,numero]), mediana(@aPrueba)) end;
+var:double :: nestedModa <- MUL(moda(@aPrueba2), moda([1,2,3,4,5,6,1,2,2])) end;
+
+! More complex nested operations
+var:double :: complexNested <- DIV(SUM(media([1,2,3]), mediana(@aPrueba)), moda([1,2,3,4,5,6,1,2,2])) end;
+var:double :: complexNested2 <- MUL(RES(mediana([mediaC,2,media2C,5,numero]), media(@aPrueba2)), moda(@aPrueba2)) end;
+
+var:double :: maxN <- max([1,2,3,4,5,6,1,2,2]) end; !el maximo aca es 6
+
+var:double :: minN <- min([1,2,3,4,5,6,-0.1,2,2]) end; !el minimo aca es -0.1
+
+arr:double:: @ArregloEstadisticas <- [ media([1,2,3]), mediana([mediaC,2,media2C,5,numero]), moda(@aPrueba2)   ] end;
+
+var: double:: MediaStats <- media(@ArregloEstadisticas) end;
 
 end program

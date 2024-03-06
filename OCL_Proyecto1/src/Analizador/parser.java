@@ -864,7 +864,21 @@ class CUP$parser$actions {
           case 31: // ESTADISTICA ::= TK_MEDIA PARA DATOS PARC 
             {
               Object RESULT =null;
-
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    double sum = 0;
+                    int count = 0;
+                    for (Object valor : datosC) {
+                            sum += Double.parseDouble(valor.toString());
+                            count++;
+                        
+                    }
+                    double media = sum / count ;
+                    RESULT = media;
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -873,7 +887,20 @@ class CUP$parser$actions {
           case 32: // ESTADISTICA ::= TK_MEDIANA PARA DATOS PARC 
             {
               Object RESULT =null;
-
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    double mediana = 0;
+                    int size = datosC.size();
+                    if (size % 2 == 0) {
+                        mediana = (Double.parseDouble(datosC.get(size / 2 - 1).toString()) + Double.parseDouble(datosC.get(size / 2).toString())) / 2;
+                    } else {
+                        mediana = Double.parseDouble(datosC.get(size / 2).toString());
+                    }
+                    RESULT = mediana;
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -882,7 +909,27 @@ class CUP$parser$actions {
           case 33: // ESTADISTICA ::= TK_MODA PARA DATOS PARC 
             {
               Object RESULT =null;
-
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    int maximoVeces = 0;
+                    double moda = 0;
+                    for (int i = 0; i < datosC.size(); i++) {
+                        int veces = 0;
+                        for (int j = 0; j < datosC.size(); j++) {
+                            if (datosC.get(i).equals(datosC.get(j))) {
+                                veces++;
+                            }
+                        }
+                        if (veces > maximoVeces) {
+                            moda = Double.parseDouble(datosC.get(i).toString());
+                            maximoVeces = veces;
+                        }
+                    }
+                    RESULT = moda;
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -891,7 +938,28 @@ class CUP$parser$actions {
           case 34: // ESTADISTICA ::= TK_VARIANZA PARA DATOS PARC 
             {
               Object RESULT =null;
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    //para la varianza se necesita calcular la media aritmetica
+                    double sum = 0;
+                    for (Object valor : datosC) {
+                            sum += Double.parseDouble(valor.toString());                      
+                    }
+                    double media = sum / datosC.size() ;
+                    // por cada dato RESTAR este valor y elevar al cuadrado
+                    double SUMparentesisCuadrados = 0;
+                    for(Object valor: datosC){
+                        double par = Double.parseDouble(valor.toString()) - media;
+                        SUMparentesisCuadrados += par * par;
+                    }
+                    double varianza = SUMparentesisCuadrados /datosC.size();
+                    RESULT = varianza;
+                    
 
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -900,7 +968,21 @@ class CUP$parser$actions {
           case 35: // ESTADISTICA ::= TK_MAX PARA DATOS PARC 
             {
               Object RESULT =null;
-
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    Double maxV = Double.parseDouble(datosC.get(0).toString());
+                    for(Object obj:datosC){
+                    double num = Double.parseDouble(obj.toString());
+                    if(num > maxV){
+                        maxV = num;
+                    }
+                    }
+                    RESULT = maxV;
+                    
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -909,7 +991,20 @@ class CUP$parser$actions {
           case 36: // ESTADISTICA ::= TK_MIN PARA DATOS PARC 
             {
               Object RESULT =null;
-
+		int arrVleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int arrVright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object arrV = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    ArrayList<Object> datosC = (ArrayList<Object>) arrV;
+                    Double minV =  Double.parseDouble(datosC.get(0).toString());
+                    for(Object obj:datosC){
+                    double num = Double.parseDouble(obj.toString());
+                    if(num < minV){
+                        minV = num;
+                    }
+                    }
+                    RESULT = minV;
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESTADISTICA",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -918,7 +1013,13 @@ class CUP$parser$actions {
           case 37: // DATOS ::= IDARREGLO 
             {
               Object RESULT =null;
-
+		int arrIDleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int arrIDright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object arrID = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+        ArrayList<Object> datos = (ArrayList<Object>) data.get(arrID);
+        RESULT = datos;
+    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DATOS",12, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -927,7 +1028,10 @@ class CUP$parser$actions {
           case 38: // DATOS ::= LISTA_VALORES 
             {
               Object RESULT =null;
-
+		int listaleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int listaright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object lista = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=lista; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DATOS",12, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
