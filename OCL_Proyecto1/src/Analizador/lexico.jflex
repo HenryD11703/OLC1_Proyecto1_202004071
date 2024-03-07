@@ -143,10 +143,7 @@ TK_LABEL = "label"
 {DECIMAL}       {Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
 {COMENTARIOS}   {}
 {COMENMULTI}    {}
-
-
-
-
+//El punto indica todo lo que no sea reconocido anteriormente
 .       {
             System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
             yycolumn++;

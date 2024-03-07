@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 
 
@@ -22,6 +23,7 @@ import java.util.Collection;
 
 parser code 
 {:
+    
     HashMap<Object,Object> data = new HashMap<>(); 
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
@@ -30,11 +32,26 @@ parser code
     public void unrecovered_syntax_error(Symbol s){
         System.out.println("Error Sintactico irrecuperable: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
+
+    LinkedList<String> impresiones = new LinkedList<>(); 
+
+    public void printAdd(String s){
+    impresiones.add(s + "\n");
+    }
+    public void printLNAdd(String s){
+    impresiones.add(0,s);
+    }
+    public String getImpresiones(){
+    StringBuilder sb = new StringBuilder();
+    for(String s : impresiones) {
+        sb.append(s);
+    }
+    return sb.toString();
+}
 :}
 
 action code
 {:
-    
     String codigoUsr="";
 :}
 
@@ -54,26 +71,28 @@ nonterminal EXPRESIONGRAPH, OTRAEXPRESIONIMP;
 
 start with INICIO;
 
-INICIO ::= TK_PROGRAM CODIGO OTROCODIGO TK_END TK_PROGRAM;
+INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM;
 
 CODIGO ::= VARIABLE 
           | ARREGLO 
           | OPERACION 
           | ESTADISTICA 
           | IMPRESION 
-          | GRAFICA ;
-
+          | GRAFICA
+          | error TK_END PYCOMA;
+ 
 OTROCODIGO ::= OTROCODIGO CODIGO
             | /* vacio */; 
 
-VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA
+VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA 
 {:
 
     data.put(n.toString(), e);
     for (Object clave : data.keySet()) {
         System.out.println("Clave: " + clave.toString() + " |    Valor: " + data.get(clave).toString());
     }
-:};
+:}
+;
 
 ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
@@ -263,15 +282,23 @@ DATOS ::= IDARREGLO:arrID {:
     :}
          | LISTA_VALORES:lista {: RESULT=lista; :};//y aca se retorna un arreglo que proviene de la produccion de listaValores
 
-IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA;
-
-TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION OTRAEXPRESIONIMP 
+IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA {: printAdd(" "); :};
+//usar prinLNAdd para imprimir en consola en la misma linea, es decir añadir esa primera expresion
+// sin salto y luego seguir añadiendo las demas expresiones sin salto hasta llegar al final 
+//crear un printAdd con un salto de linea al final de todas las expresiones
+TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION:e OTRAEXPRESIONIMP  
+        {: 
+                printLNAdd(e.toString()); 
+        :} 
                 | TK_COLUMN IGUAL EXPRESION MENOS MAYORQ ARREGLOIMP;
 
 ARREGLOIMP ::= IDARREGLO 
             | LISTA_VALORES;
 
-OTRAEXPRESIONIMP ::= COMA EXPRESION OTRAEXPRESIONIMP 
+OTRAEXPRESIONIMP ::= COMA EXPRESION:e  OTRAEXPRESIONIMP 
+                {: 
+                    printLNAdd(e.toString());
+                :}
                   | /* vacio */;
 
 GRAFICA ::= TIPOGRAPH PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;

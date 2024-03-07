@@ -314,11 +314,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 // Obtener el texto del JTextArea
                 String texto = cuadroTexto.getText();
                 System.out.println(texto);
-                Consola.setText(texto);
+                
                 Scanner scanner = new Scanner(new BufferedReader(new StringReader(texto)));
-                parser Parser = new parser(scanner);
+                parser Parser = new parser(scanner);       
                 Parser.parse();
-               
+                String console = Parser.getImpresiones();
+                Consola.setText(console);         
                 
             }
         } catch (Exception e) {
