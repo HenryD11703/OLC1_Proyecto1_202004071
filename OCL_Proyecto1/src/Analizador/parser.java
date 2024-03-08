@@ -1410,7 +1410,11 @@ System.out.println("Haciendo grafica de tipo: "+tg);
 		int Ioleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int Ioright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object Io = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT=Io; 
+		 
+                        Map<String, Object> datos = (Map<String, Object>) OIo;
+                        datos.putAll((Map<String, Object>) Io);
+                        RESULT=Io; 
+                    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OTRAINSTRUCCION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1419,7 +1423,7 @@ System.out.println("Haciendo grafica de tipo: "+tg);
           case 64: // OTRAINSTRUCCION ::= 
             {
               Object RESULT =null;
-
+		 RESULT=new HashMap<>(); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OTRAINSTRUCCION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

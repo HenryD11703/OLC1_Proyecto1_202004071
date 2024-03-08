@@ -424,6 +424,11 @@ TIPOINSTRUCCION ::= TK_VALUES {: RESULT="values"; :}
 EXPRESIONGRAPH ::= EXPRESION:e {: RESULT=e; :} 
                 | LISTA_VALORES:lista {: RESULT=lista; :};
 
-OTRAINSTRUCCION ::= OTRAINSTRUCCION:OIo  INSTRUCCION:Io {: RESULT=Io; :} 
-                    | /* vacio */;
+OTRAINSTRUCCION ::= OTRAINSTRUCCION:OIo  INSTRUCCION:Io 
+                    {: 
+                        Map<String, Object> datos = (Map<String, Object>) OIo;
+                        datos.putAll((Map<String, Object>) Io);
+                        RESULT=Io; 
+                    :} 
+                    | /* vacio */ {: RESULT=new HashMap<>(); :};
 
