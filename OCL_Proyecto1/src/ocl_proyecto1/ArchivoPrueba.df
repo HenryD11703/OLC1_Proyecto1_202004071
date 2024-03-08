@@ -87,4 +87,6 @@ console::print = @ArregloEstadisticas end;
 var: double:: MediaStats <- media(@ArregloEstadisticas) end;
 console::print = MediaStats end;
 
+console::column = "Print column" -> ["Hola" , MediaStats, minN, "valores" ] end;
+
 end program

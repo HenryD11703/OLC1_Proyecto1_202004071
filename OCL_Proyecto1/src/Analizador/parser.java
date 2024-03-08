@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import org.jfree.data.category.DefaultCategoryDataset;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -1101,7 +1102,27 @@ class CUP$parser$actions {
           case 43: // TIPOIMPRESION ::= TK_COLUMN IGUAL EXPRESION MENOS MAYORQ ARREGLOIMP 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		int arregloleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int arregloright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object arreglo = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+                    ArrayList<Object> datosImp = (ArrayList<Object>) arreglo;
+                    //Aca quiero meter los datos del arreglo donde el titulo sera el e.toString()
+                    //y los datos del arreglo agregar cada uno al addPrintExpression con salto de linea al final de cada uno
+                    addPrintExpression("---------------------\n");
+                    addPrintExpression(e.toString());
+                    addPrintExpression("\n");
+                    addPrintExpression("---------------------\n");
+                    for(Object dato: datosImp){
+                        addPrintExpression(dato.toString());
+                        addPrintExpression("\n");
+                    }
+                    addPrintExpression("---------------------\n");
 
+                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOIMPRESION",14, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1110,7 +1131,13 @@ class CUP$parser$actions {
           case 44: // ARREGLOIMP ::= IDARREGLO 
             {
               Object RESULT =null;
-
+		int arrIDleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int arrIDright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object arrID = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+        ArrayList<Object> datos = (ArrayList<Object>) data.get(arrID);
+        RESULT = datos;
+    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ARREGLOIMP",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1119,7 +1146,10 @@ class CUP$parser$actions {
           case 45: // ARREGLOIMP ::= LISTA_VALORES 
             {
               Object RESULT =null;
-
+		int listaleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int listaright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object lista = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=lista; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ARREGLOIMP",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1149,6 +1179,9 @@ class CUP$parser$actions {
           case 48: // GRAFICA ::= TIPOGRAPH PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA 
             {
               Object RESULT =null;
+		int tgleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).left;
+		int tgright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).right;
+		Object tg = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-10)).value;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("GRAFICA",16, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1158,7 +1191,7 @@ class CUP$parser$actions {
           case 49: // TIPOGRAPH ::= TK_GRAPHBAR 
             {
               Object RESULT =null;
-
+		 RESULT = "bar"; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOGRAPH",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1167,7 +1200,7 @@ class CUP$parser$actions {
           case 50: // TIPOGRAPH ::= TK_GRAPHPIE 
             {
               Object RESULT =null;
-
+		 RESULT = "pie"; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOGRAPH",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1176,7 +1209,7 @@ class CUP$parser$actions {
           case 51: // TIPOGRAPH ::= TK_GRAPHLINE 
             {
               Object RESULT =null;
-
+		 RESULT = "line"; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOGRAPH",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1185,7 +1218,7 @@ class CUP$parser$actions {
           case 52: // TIPOGRAPH ::= TK_HISTOGRAM 
             {
               Object RESULT =null;
-
+		 RESULT = "histogram"; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOGRAPH",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

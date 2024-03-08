@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 
 
@@ -73,6 +74,7 @@ CODIGO ::= VARIABLE
  
 OTROCODIGO ::= OTROCODIGO CODIGO
             | /* vacio */; 
+
 
 VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA 
 {:
@@ -277,20 +279,53 @@ IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA {: addPrintExpres
 // sin salto y luego seguir añadiendo las demas expresiones sin salto hasta llegar al final 
 //crear un printAdd con un salto de linea al final de todas las expresiones
 TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION:e {: addPrintExpression(e.toString()); :} OTRAEXPRESIONIMP  
-                | TK_COLUMN IGUAL EXPRESION MENOS MAYORQ ARREGLOIMP;
+                | TK_COLUMN IGUAL EXPRESION:e MENOS MAYORQ ARREGLOIMP:arreglo
+                {:
+                    ArrayList<Object> datosImp = (ArrayList<Object>) arreglo;
+                    //Aca quiero meter los datos del arreglo donde el titulo sera el e.toString()
+                    //y los datos del arreglo agregar cada uno al addPrintExpression con salto de linea al final de cada uno
+                    addPrintExpression("---------------------\n");
+                    addPrintExpression(e.toString());
+                    addPrintExpression("\n");
+                    addPrintExpression("---------------------\n");
+                    for(Object dato: datosImp){
+                        addPrintExpression(dato.toString());
+                        addPrintExpression("\n");
+                    }
+                    addPrintExpression("---------------------\n");
 
-ARREGLOIMP ::= IDARREGLO 
-            | LISTA_VALORES;
+                :};
+
+ARREGLOIMP ::= IDARREGLO:arrID {:
+        ArrayList<Object> datos = (ArrayList<Object>) data.get(arrID);
+        RESULT = datos;
+    :}
+            | LISTA_VALORES:lista {: RESULT=lista; :};//y aca se retorna un arreglo que proviene de la produccion de listaValores
+
 
 OTRAEXPRESIONIMP ::= OTRAEXPRESIONIMP COMA EXPRESION:e {: addPrintExpression(e.toString()); :} 
                   | /* vacio */;
 
-GRAFICA ::= TIPOGRAPH PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;
+                  //Impresiones Terminadas
+                  //TODO: GRAFICAS, installar la libreria de jfreechart para graficar
+                  //crear una clase que se encargue de graficar y que reciba los datos de la grafica
+                  //y la imagen que retorne la guarde en un archivo con el nombre de la grafica y mostrar esto 
+                  // en el area de imagenes de la interfaz grafica
 
-TIPOGRAPH ::= TK_GRAPHBAR 
-            | TK_GRAPHPIE 
-            | TK_GRAPHLINE 
-            | TK_HISTOGRAM;
+
+// Jfreechart
+// DefaulCategoryDataset dataset = new DefaultCategoryDataset(); para graficas de barras
+// DefaultPieDataset dataset = new DefaultPieDataset(); para graficas de pastel
+// DefaultXYDataset dataset = new DefaultXYDataset(); para graficas de lineas
+// HistogramDataset dataset = new HistogramDataset(); para graficas de histogramas
+
+
+GRAFICA ::= TIPOGRAPH:tg PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;//En esta parte crear la grafica 
+
+TIPOGRAPH ::= TK_GRAPHBAR {: RESULT = "bar"; :}
+            | TK_GRAPHPIE {: RESULT = "pie"; :} 
+            | TK_GRAPHLINE {: RESULT = "line"; :} 
+            | TK_HISTOGRAM {: RESULT = "histogram"; :};
 
 INSTRUCCION ::= TIPOINSTRUCCION DOSP DOSP TIPO IGUAL EXPRESIONGRAPH TK_END PYCOMA;
 
@@ -307,5 +342,4 @@ TIPOINSTRUCCION ::= TK_VALUES
 
 OTRAINSTRUCCION ::= OTRAINSTRUCCION  INSTRUCCION 
                     | /* vacio */;
-
 

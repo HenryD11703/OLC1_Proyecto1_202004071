@@ -958,8 +958,8 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 66: break;
           case 17:
-            { String textWithoutQuotes = yytext().substring(1, yytext().length() - 1);
-    Symbol symbol = new Symbol(sym.STRINGT, yyline, yycolumn, textWithoutQuotes);
+            { String TextoR = yytext().substring(1, yytext().length() - 1);
+    Symbol symbol = new Symbol(sym.STRINGT, yyline, yycolumn, TextoR);
     System.out.println("Token reconocido: " + symbol.value);
     return symbol;
             }
