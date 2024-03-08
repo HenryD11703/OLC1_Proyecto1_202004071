@@ -89,4 +89,12 @@ console::print = MediaStats end;
 
 console::column = "Print column" -> ["Hola" , MediaStats, minN, "valores" ] end;
 
+
+graphPie(
+label::char[] = ["Uno", "Dos", "Tres"] end;
+values::double = [50, 30, 20] end;
+titulo::char[] = "Ejemplo Gráfica de Pie" end;
+EXEC graphPie end;
+) end;
+
 end program

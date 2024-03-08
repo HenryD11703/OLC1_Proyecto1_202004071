@@ -25,7 +25,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class Graficador {
 
-    public void crearGraphBarra(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas, String titulox, String tituloy) throws IOException{
+    public static void crearGraphBarra(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas, String titulox, String tituloy) throws IOException{
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valores.size(); i++) {
             dataset.addValue(valores.get(i), "", etiquetas.get(i));

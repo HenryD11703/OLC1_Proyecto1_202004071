@@ -322,18 +322,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 String console = Parser.getImpresiones();
                 Consola.setText(console);
                 
-                Graficador graficador = new Graficador();
-                ArrayList<Double> valores = new ArrayList<>(Arrays.asList(12.0, 3.0, 5.0));
-                ArrayList<String> etiquetas = new ArrayList<>(Arrays.asList("Etiqueta1", "Etiqueta2", "Etiqueta3"));
+             
 
-
-                graficador.crearGraphBarra(valores, "Bar", etiquetas, "EjeX", "EjeY");
-                
-                graficador.crearGraphPie(valores, "Pie", etiquetas);
-
-                graficador.crearGraphLinea(valores, "Linea","Eje x", "Eje y");
-
-                graficador.crearHistogram("Histograma", valores);
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");

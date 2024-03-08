@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import org.jfree.data.category.DefaultCategoryDataset;
-
+import java.util.Map;
+import java.util.Arrays;
 
 
 
@@ -140,7 +141,8 @@ EXPRESION ::= ENTEROS:E {: RESULT=E; :}
                          :} 
              | OPERACION:E {: RESULT=E; :} 
              | IDARREGLO:E {: //Para cuando sean arreglos guarlos y retornar el arreglo
-                           RESULT=data.get(E); 
+                           ArrayList<Object> datos = (ArrayList<Object>) data.get(E);
+                            RESULT = datos; 
                             :} 
              | ESTADISTICA: E {: RESULT=E; :};
 
@@ -318,28 +320,110 @@ OTRAEXPRESIONIMP ::= OTRAEXPRESIONIMP COMA EXPRESION:e {: addPrintExpression(e.t
 // DefaultPieDataset dataset = new DefaultPieDataset(); para graficas de pastel
 // DefaultXYDataset dataset = new DefaultXYDataset(); para graficas de lineas
 // HistogramDataset dataset = new HistogramDataset(); para graficas de histogramas
+// esto esta dnetro de la clase Graficador del paquete de graficas, asi que solo mandar 
+// a llamar e introducir los datos correspondientes a cada grafica
+
+// Graficador graficador = new Graficador();
+
+// if(tg.equals("bar")){
+//public void crearGraphBarra(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas, String titulox, String tituloy) throws IOException{
+// }else if(tg.equals("pie")){
+// public void crearGraphPie(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas) throws IOException{    
+// }else if(tg.equals("line")){
+// public void crearGraphLinea(ArrayList<Double> valores, String titulo, String tituloX , String tituloY) throws IOException {
+// }else if(tg.equals("histogram")){
+// public void crearHistogram(String titulo, ArrayList<Double> valores) throws IOException {    
+// }
+GRAFICA ::= TIPOGRAPH:tg PARA INSTRUCCION:Io OTRAINSTRUCCION:OIo TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA
+ {:
+ Graficador graficador = new Graficador();
+ //A este mapa adjuntarle el mapa de OIo
+ Map<String, Object> instruccionDatos = (Map<String, Object>) Io;
+Map<String, Object> instruccionDatos2 = (Map<String, Object>) OIo;
+instruccionDatos.putAll(instruccionDatos2);
+System.out.println(instruccionDatos);
+System.out.println("Haciendo grafica de tipo: "+tg);
+ if(tg.equals("bar")){
+ //Si es un grafico de barras necesitamos la informacion de Titulo, Arreglo ejeX, Arreglo ejeY, TituloX, TituloY
+ //TODO: Crear un arreglo que guarde estos datos, y reemplazar el primero por si se repite uno de estos datos
+    //y luego mandar a llamar al graficador con estos datos
+    Object[] datos = new Object[5]; 
+    //El indice 0 es el titulo
+    //El indice 1 es el arreglo ejeX
+    //El indice 2 es el arreglo ejeY
+    //El indice 3 es el tituloX
+    //El indice 4 es el tituloY
+    Object Titulo = instruccionDatos.get("titulo");
+    Object[] arregloEjeX = (Object[]) instruccionDatos.get("ejeX");
+    Object[] arregloEjeY = (Object[]) instruccionDatos.get("ejeY");
+    Object TituloX = instruccionDatos.get("tituloX");
+    Object TituloY = instruccionDatos.get("tituloY");
+    ArrayList<Object> listaEjeX = new ArrayList<>(Arrays.asList(arregloEjeX));
+    ArrayList<Object> listaEjeY = new ArrayList<>(Arrays.asList(arregloEjeY));
+
+    ArrayList<Double> listaEjeXDouble = new ArrayList<>();
+    for (Object elemento : listaEjeX) {
+        double valorDouble = Double.parseDouble(elemento.toString());
+        listaEjeXDouble.add(valorDouble);
+    }
+    ArrayList<String> listaEjeYString = new ArrayList<>();
+    for (Object elemento : listaEjeY) {
+    String valorString = elemento.toString();
+    listaEjeYString.add(valorString);
+    }
+    datos[0] = Titulo;
+    datos[1] = listaEjeX;
+    datos[2] = listaEjeY;
+    datos[3] = TituloX;
+    datos[4] = TituloY;
+    graficador.crearGraphBarra(listaEjeXDouble, datos[0].toString(), listaEjeYString, datos[3].toString(), datos[4].toString());
+    
 
 
-GRAFICA ::= TIPOGRAPH:tg PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;//En esta parte crear la grafica 
+ }
+ :};
 
 TIPOGRAPH ::= TK_GRAPHBAR {: RESULT = "bar"; :}
             | TK_GRAPHPIE {: RESULT = "pie"; :} 
             | TK_GRAPHLINE {: RESULT = "line"; :} 
             | TK_HISTOGRAM {: RESULT = "histogram"; :};
 
-INSTRUCCION ::= TIPOINSTRUCCION DOSP DOSP TIPO IGUAL EXPRESIONGRAPH TK_END PYCOMA;
+INSTRUCCION ::= TIPOINSTRUCCION:tipoI DOSP DOSP TIPO IGUAL EXPRESIONGRAPH:DatosExp TK_END PYCOMA
+{:
+    Map<String, Object> datos = new HashMap<>();
+//hacer un Result de este hashmap y buscar arriba la clave y obtener los valores de cada uno y meter estos en el
+// array de datos para ya mandar a llamar a la clase graficador de cada tipo de grafica
+    if(tipoI.equals("values")){
+        datos.put("values", DatosExp);
+    }else if(tipoI.equals("titulo")){
+        datos.put("titulo", DatosExp);
+    }else if(tipoI.equals("label")){
+        datos.put("label", DatosExp);
+    }else if(tipoI.equals("ejeX")){
+        datos.put("ejeX", DatosExp);
+    }else if(tipoI.equals("ejeY")){
+        datos.put("ejeY", DatosExp);
+    }else if(tipoI.equals("tituloX")){
+        datos.put("tituloX", DatosExp);
+    }else if(tipoI.equals("tituloY")){
+        datos.put("tituloY", DatosExp);
+    }
+    RESULT = datos;
+:};
 
-EXPRESIONGRAPH ::= EXPRESION 
-                | LISTA_VALORES;
 
-TIPOINSTRUCCION ::= TK_VALUES 
-                    | TK_TITULO
-                    | TK_LABEL 
-                    | TK_EJEX 
-                    | TK_EJEY 
-                    | TK_TITULOX 
-                    | TK_TITULOY;
+TIPOINSTRUCCION ::= TK_VALUES {: RESULT="values"; :}
+                    | TK_TITULO {: RESULT="titulo"; :}
+                    | TK_LABEL {: RESULT="label"; :}  
+                    | TK_EJEX {: RESULT="ejeX"; :} 
+                    | TK_EJEY {: RESULT="ejeY"; :} 
+                    | TK_TITULOX {: RESULT="tituloX"; :}  
+                    | TK_TITULOY {: RESULT="tituloY"; :};
 
-OTRAINSTRUCCION ::= OTRAINSTRUCCION  INSTRUCCION 
+
+EXPRESIONGRAPH ::= EXPRESION:e {: RESULT=e; :} 
+                | LISTA_VALORES:lista {: RESULT=lista; :};
+
+OTRAINSTRUCCION ::= OTRAINSTRUCCION:OIo  INSTRUCCION:Io {: RESULT=Io; :} 
                     | /* vacio */;
 

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.util.Map;
+import java.util.Arrays;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -53,10 +55,10 @@ public class parser extends java_cup.runtime.lr_parser {
     "\002\000\002\020\007\000\002\020\010\000\002\021\003" +
     "\000\002\021\003\000\002\030\005\000\002\030\002\000" +
     "\002\022\015\000\002\023\003\000\002\023\003\000\002" +
-    "\023\003\000\002\023\003\000\002\024\012\000\002\027" +
-    "\003\000\002\027\003\000\002\025\003\000\002\025\003" +
+    "\023\003\000\002\023\003\000\002\024\012\000\002\025" +
+    "\003\000\002\025\003\000\002\025\003\000\002\025\003" +
     "\000\002\025\003\000\002\025\003\000\002\025\003\000" +
-    "\002\025\003\000\002\025\003\000\002\026\004\000\002" +
+    "\002\027\003\000\002\027\003\000\002\026\004\000\002" +
     "\026\002" });
 
   /** Access to production table. */
@@ -106,10 +108,10 @@ public class parser extends java_cup.runtime.lr_parser {
     "\013\042\001\002\000\020\050\047\051\050\052\046\053" +
     "\052\054\051\056\044\057\045\001\002\000\022\050\uffc1" +
     "\051\uffc1\052\uffc1\053\uffc1\054\uffc1\055\uffc1\056\uffc1\057" +
-    "\uffc1\001\002\000\004\004\uffc9\001\002\000\004\004\uffc7" +
-    "\001\002\000\004\004\uffc5\001\002\000\004\004\uffc8\001" +
-    "\002\000\004\004\uffc6\001\002\000\004\004\uffc3\001\002" +
-    "\000\004\004\uffc4\001\002\000\004\004\054\001\002\000" +
+    "\uffc1\001\002\000\004\004\uffcb\001\002\000\004\004\uffc9" +
+    "\001\002\000\004\004\uffc7\001\002\000\004\004\uffca\001" +
+    "\002\000\004\004\uffc8\001\002\000\004\004\uffc5\001\002" +
+    "\000\004\004\uffc6\001\002\000\004\004\054\001\002\000" +
     "\004\004\055\001\002\000\006\022\057\023\056\001\002" +
     "\000\006\004\ufff3\016\ufff3\001\002\000\006\004\ufff2\016" +
     "\ufff2\001\002\000\004\016\061\001\002\000\044\010\064" +
@@ -121,13 +123,13 @@ public class parser extends java_cup.runtime.lr_parser {
     "\067\026\036\027\032\030\024\031\015\032\030\033\007" +
     "\034\012\035\014\036\026\037\023\040\020\060\070\061" +
     "\063\062\073\063\074\001\002\000\014\011\uffe7\014\uffe7" +
-    "\015\uffe7\017\uffe7\024\uffe7\001\002\000\004\024\uffca\001" +
+    "\015\uffe7\017\uffe7\024\uffe7\001\002\000\004\024\uffc3\001" +
     "\002\000\004\063\100\001\002\000\014\011\uffed\014\uffed" +
     "\015\uffed\017\uffed\024\uffed\001\002\000\014\011\uffe8\014" +
     "\uffe8\015\uffe8\017\uffe8\024\uffe8\001\002\000\004\024\076" +
     "\001\002\000\014\011\uffeb\014\uffeb\015\uffeb\017\uffeb\024" +
     "\uffeb\001\002\000\014\011\uffea\014\uffea\015\uffea\017\uffea" +
-    "\024\uffea\001\002\000\004\024\uffcb\001\002\000\004\007" +
+    "\024\uffea\001\002\000\004\024\uffc4\001\002\000\004\007" +
     "\077\001\002\000\022\050\uffcc\051\uffcc\052\uffcc\053\uffcc" +
     "\054\uffcc\055\uffcc\056\uffcc\057\uffcc\001\002\000\016\005" +
     "\ufff1\011\ufff1\014\ufff1\015\ufff1\017\ufff1\024\ufff1\001\002" +
@@ -460,7 +462,7 @@ class CUP$parser$actions {
           case 1: // INICIO ::= TK_PROGRAM CODIGO OTROCODIGO TK_END TK_PROGRAM 
             {
               Object RESULT =null;
-
+		  
               CUP$parser$result = parser.getSymbolFactory().newSymbol("INICIO",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -774,7 +776,8 @@ class CUP$parser$actions {
 		int Eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object E = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		 //Para cuando sean arreglos guarlos y retornar el arreglo
-                           RESULT=data.get(E); 
+                           ArrayList<Object> datos = (ArrayList<Object>) data.get(E);
+                            RESULT = datos; 
                             
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESION",9, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1182,7 +1185,59 @@ class CUP$parser$actions {
 		int tgleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).left;
 		int tgright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).right;
 		Object tg = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-10)).value;
+		int Ioleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
+		int Ioright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
+		Object Io = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
+		int OIoleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
+		int OIoright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
+		Object OIo = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		
+ Graficador graficador = new Graficador();
+ //A este mapa adjuntarle el mapa de OIo
+ Map<String, Object> instruccionDatos = (Map<String, Object>) Io;
+Map<String, Object> instruccionDatos2 = (Map<String, Object>) OIo;
+instruccionDatos.putAll(instruccionDatos2);
+System.out.println(instruccionDatos);
+System.out.println("Haciendo grafica de tipo: "+tg);
+ if(tg.equals("bar")){
+ //Si es un grafico de barras necesitamos la informacion de Titulo, Arreglo ejeX, Arreglo ejeY, TituloX, TituloY
+ //TODO: Crear un arreglo que guarde estos datos, y reemplazar el primero por si se repite uno de estos datos
+    //y luego mandar a llamar al graficador con estos datos
+    Object[] datos = new Object[5]; 
+    //El indice 0 es el titulo
+    //El indice 1 es el arreglo ejeX
+    //El indice 2 es el arreglo ejeY
+    //El indice 3 es el tituloX
+    //El indice 4 es el tituloY
+    Object Titulo = instruccionDatos.get("titulo");
+    Object[] arregloEjeX = (Object[]) instruccionDatos.get("ejeX");
+    Object[] arregloEjeY = (Object[]) instruccionDatos.get("ejeY");
+    Object TituloX = instruccionDatos.get("tituloX");
+    Object TituloY = instruccionDatos.get("tituloY");
+    ArrayList<Object> listaEjeX = new ArrayList<>(Arrays.asList(arregloEjeX));
+    ArrayList<Object> listaEjeY = new ArrayList<>(Arrays.asList(arregloEjeY));
 
+    ArrayList<Double> listaEjeXDouble = new ArrayList<>();
+    for (Object elemento : listaEjeX) {
+        double valorDouble = Double.parseDouble(elemento.toString());
+        listaEjeXDouble.add(valorDouble);
+    }
+    ArrayList<String> listaEjeYString = new ArrayList<>();
+    for (Object elemento : listaEjeY) {
+    String valorString = elemento.toString();
+    listaEjeYString.add(valorString);
+    }
+    datos[0] = Titulo;
+    datos[1] = listaEjeX;
+    datos[2] = listaEjeY;
+    datos[3] = TituloX;
+    datos[4] = TituloY;
+    graficador.crearGraphBarra(listaEjeXDouble, datos[0].toString(), listaEjeYString, datos[3].toString(), datos[4].toString());
+    
+
+
+ }
+ 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("GRAFICA",16, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1227,89 +1282,121 @@ class CUP$parser$actions {
           case 53: // INSTRUCCION ::= TIPOINSTRUCCION DOSP DOSP TIPO IGUAL EXPRESIONGRAPH TK_END PYCOMA 
             {
               Object RESULT =null;
+		int tipoIleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
+		int tipoIright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
+		Object tipoI = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		int DatosExpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int DatosExpright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		Object DatosExp = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		
+    Map<String, Object> datos = new HashMap<>();
+//hacer un Result de este hashmap y buscar arriba la clave y obtener los valores de cada uno y meter estos en el
+// array de datos para ya mandar a llamar a la clase graficador de cada tipo de grafica
+    if(tipoI.equals("values")){
+        datos.put("values", DatosExp);
+    }else if(tipoI.equals("titulo")){
+        datos.put("titulo", DatosExp);
+    }else if(tipoI.equals("label")){
+        datos.put("label", DatosExp);
+    }else if(tipoI.equals("ejeX")){
+        datos.put("ejeX", DatosExp);
+    }else if(tipoI.equals("ejeY")){
+        datos.put("ejeY", DatosExp);
+    }else if(tipoI.equals("tituloX")){
+        datos.put("tituloX", DatosExp);
+    }else if(tipoI.equals("tituloY")){
+        datos.put("tituloY", DatosExp);
+    }
+    RESULT = datos;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("INSTRUCCION",18, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 54: // EXPRESIONGRAPH ::= EXPRESION 
+          case 54: // TIPOINSTRUCCION ::= TK_VALUES 
             {
               Object RESULT =null;
+		 RESULT="values"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
 
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 55: // TIPOINSTRUCCION ::= TK_TITULO 
+            {
+              Object RESULT =null;
+		 RESULT="titulo"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 56: // TIPOINSTRUCCION ::= TK_LABEL 
+            {
+              Object RESULT =null;
+		 RESULT="label"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 57: // TIPOINSTRUCCION ::= TK_EJEX 
+            {
+              Object RESULT =null;
+		 RESULT="ejeX"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 58: // TIPOINSTRUCCION ::= TK_EJEY 
+            {
+              Object RESULT =null;
+		 RESULT="ejeY"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 59: // TIPOINSTRUCCION ::= TK_TITULOX 
+            {
+              Object RESULT =null;
+		 RESULT="tituloX"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 60: // TIPOINSTRUCCION ::= TK_TITULOY 
+            {
+              Object RESULT =null;
+		 RESULT="tituloY"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 61: // EXPRESIONGRAPH ::= EXPRESION 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=e; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONGRAPH",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 55: // EXPRESIONGRAPH ::= LISTA_VALORES 
+          case 62: // EXPRESIONGRAPH ::= LISTA_VALORES 
             {
               Object RESULT =null;
-
+		int listaleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int listaright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object lista = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=lista; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONGRAPH",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 56: // TIPOINSTRUCCION ::= TK_VALUES 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 57: // TIPOINSTRUCCION ::= TK_TITULO 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 58: // TIPOINSTRUCCION ::= TK_LABEL 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 59: // TIPOINSTRUCCION ::= TK_EJEX 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 60: // TIPOINSTRUCCION ::= TK_EJEY 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 61: // TIPOINSTRUCCION ::= TK_TITULOX 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 62: // TIPOINSTRUCCION ::= TK_TITULOY 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("TIPOINSTRUCCION",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -1317,7 +1404,13 @@ class CUP$parser$actions {
           case 63: // OTRAINSTRUCCION ::= OTRAINSTRUCCION INSTRUCCION 
             {
               Object RESULT =null;
-
+		int OIoleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int OIoright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Object OIo = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int Ioleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int Ioright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object Io = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=Io; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OTRAINSTRUCCION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
