@@ -1,50 +1,90 @@
 PRogRaM !HOLA
 
 var:double :: numero <- 2.5 end;
-var:char[] :: cadena <- "cadena" end;<! ESTE ES UN COMENTARIO MULTILINEA QUE PUED
-E CONTENER LO QUE SEA -   Hasta estos simbolos " " / ! 12 4 ? Que no son validos para el lenguaje  !>
+console::print = "El numero es: " ,numero end;
+
+var:char[] :: cadena <- "cadena" end;
+console::print = "La cadena es: ", cadena end;
+
 var:double :: variable <- SUM(numero,numero) end;
-var:double :: copia <- numero end; ! copia tiene el valor 2.5 
+console::print = "La variable es: ", variable end;
 
- arr:double::@aPrueba <- [1,MUL(numero,-1),2,numero,3] end;
- 
-! Operaciones
+var:double :: copia <- numero end;
+console::print = "El numero ahora es igual a  " ,copia end;
+
+arr:double::@aPrueba <- [1,MUL(numero,-1),2,numero,3] end;
+console::print ="Arreglo de manera normal ",  @aPrueba end;
+
 var:double :: suma <- SUM(5, 2) end;
-var:double :: resta <- RES(3, 2) end;
-var:double :: multi <- MUL(4, numero) end; ! Funciona con variables
-var:double :: division <- DIV(1, variable) end;
-var:double :: modulo <- MOD(5, 4) end;
+console::print = "El valor de la suma de 5 y 2:   ",  suma end;
 
-! Operaciones anidadas
+var:double :: resta <- RES(3, 2) end;
+console::print ="El valor de la resta de 3 y 2:  ", resta end;
+
+var:double :: multi <- MUL(4, numero) end;
+console::print = "La multipicacion entre ", 4, " y " , numero, " = ",multi end;
+
+var:double :: division <- DIV(1, variable) end;
+console::print = "The division of 1 by ", variable, " = ", division end;
+
+var:double :: modulo <- MOD(5, 4) end;
+console::print = "The modulo of 5 and 4 = ", modulo end;
+
 var:double :: sumaf <- MUL( SUM(7,3) , RES(7, DIV(25,5))) end;
+console::print = "The result of the operation MUL( SUM(7,3) , RES(7, DIV(25,5))) = ", sumaf end;
+
 var:double :: pruebaOP <- SUM(sumaf,SUM(numero,SUM(numero,suma))) end;
- 
- arr:double::@aPrueba2 <- [1,numero,numero,3,2,3,4,2,2,2,1,1,1,1,2,3,4,suma,3] end;
+console::print = "The result of the operation SUM(sumaf,SUM(numero,SUM(numero,suma))) = ", pruebaOP end;
+
+arr:double::@aPrueba2 <- [1,numero,numero,3,2,3,4,2,2,2,1,1,1,1,2,3,4,suma,3] end;
+console::print = "The array @aPrueba2 = ", @aPrueba2 end;
 
 var:double :: mediaC <-  media([1,2,3]) end;
+console::print = "The average of [1,2,3] = ", mediaC end;
+
 var:double :: media2C <-  media(@aPrueba2) end;
+console::print = "The average of @aPrueba2 = ", media2C end;
 
 var:double:: medianaPrueb <- mediana([mediaC,2,media2C,5,numero]) end;
+console::print = "The median of [mediaC,2,media2C,5,numero] = ", medianaPrueb end;
+
 var:double :: mediana2 <- mediana(@aPrueba) end;
+console::print = "The median of @aPrueba = ", mediana2 end;
+
 var:double:: modaaS <- moda(@aPrueba2) end;
+console::print = "The mode of @aPrueba2 = ", modaaS end;
+
 var:double :: modaLV <- moda([1,2,3,4,5,6,1,2,2]) end;
+console::print = "The mode of [1,2,3,4,5,6,1,2,2] = ", modaLV end;
+
 var:double:: sumaEst <- SUM(moda(@aPrueba2),mediana(@aPrueba)) end;
+console::print = "The sum of the mode of @aPrueba2 and the median of @aPrueba = ", sumaEst end;
 
-! Nested operations with statistical functions
 var:double :: nestedMedia <- SUM(media([1,2,3]), media(@aPrueba2)) end;
+console::print = "The sum of the average of [1,2,3] and the average of @aPrueba2 = ", nestedMedia end;
+
 var:double :: nestedMediana <- RES(mediana([mediaC,2,media2C,5,numero]), mediana(@aPrueba)) end;
+console::print = "The difference between the median of [mediaC,2,media2C,5,numero] and the median of @aPrueba = ", nestedMediana end;
+
 var:double :: nestedModa <- MUL(moda(@aPrueba2), moda([1,2,3,4,5,6,1,2,2])) end;
+console::print = nestedModa end;
 
-! More complex nested operations
 var:double :: complexNested <- DIV(SUM(media([1,2,3]), mediana(@aPrueba)), moda([1,2,3,4,5,6,1,2,2])) end;
+console::print = complexNested end;
+
 var:double :: complexNested2 <- MUL(RES(mediana([mediaC,2,media2C,5,numero]), media(@aPrueba2)), moda(@aPrueba2)) end;
+console::print = complexNested2 end;
 
-var:double :: maxN <- max([1,2,3,4,5,6,1,2,2]) end; !el maximo aca es 6
+var:double :: maxN <- max([1,2,3,4,5,6,1,2,2]) end;
+console::print = maxN end;
 
-var:double :: minN <- min([1,2,3,4,5,6,-0.1,2,2]) end; !el minimo aca es -0.1
+var:double :: minN <- min([1,2,3,4,5,6,-0.1,2,2]) end;
+console::print = minN end;
 
 arr:double:: @ArregloEstadisticas <- [ media([1,2,3]), mediana([mediaC,2,media2C,5,numero]), moda(@aPrueba2)   ] end;
+console::print = @ArregloEstadisticas end;
 
 var: double:: MediaStats <- media(@ArregloEstadisticas) end;
+console::print = MediaStats end;
 
 end program

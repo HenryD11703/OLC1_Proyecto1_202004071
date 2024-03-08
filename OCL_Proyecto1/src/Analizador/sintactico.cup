@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 parser code 
 {:
-    
+    StringBuilder printString = new StringBuilder();
     HashMap<Object,Object> data = new HashMap<>(); 
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
@@ -32,22 +32,12 @@ parser code
     public void unrecovered_syntax_error(Symbol s){
         System.out.println("Error Sintactico irrecuperable: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
-
-    LinkedList<String> impresiones = new LinkedList<>(); 
-
-    public void printAdd(String s){
-    impresiones.add(s + "\n");
+    public void addPrintExpression(String expr) {
+        printString.append(expr);
     }
-    public void printLNAdd(String s){
-    impresiones.add(0,s);
+     public String getImpresiones() {
+        return printString.toString();
     }
-    public String getImpresiones(){
-    StringBuilder sb = new StringBuilder();
-    for(String s : impresiones) {
-        sb.append(s);
-    }
-    return sb.toString();
-}
 :}
 
 action code
@@ -282,23 +272,17 @@ DATOS ::= IDARREGLO:arrID {:
     :}
          | LISTA_VALORES:lista {: RESULT=lista; :};//y aca se retorna un arreglo que proviene de la produccion de listaValores
 
-IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA {: printAdd(" "); :};
+IMPRESION ::= TK_CONSOLE DOSP DOSP TIPOIMPRESION TK_END PYCOMA {: addPrintExpression("\n"); :} ;
 //usar prinLNAdd para imprimir en consola en la misma linea, es decir añadir esa primera expresion
 // sin salto y luego seguir añadiendo las demas expresiones sin salto hasta llegar al final 
 //crear un printAdd con un salto de linea al final de todas las expresiones
-TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION:e OTRAEXPRESIONIMP  
-        {: 
-                printLNAdd(e.toString()); 
-        :} 
+TIPOIMPRESION ::= TK_PRINT IGUAL EXPRESION:e {: addPrintExpression(e.toString()); :} OTRAEXPRESIONIMP  
                 | TK_COLUMN IGUAL EXPRESION MENOS MAYORQ ARREGLOIMP;
 
 ARREGLOIMP ::= IDARREGLO 
             | LISTA_VALORES;
 
-OTRAEXPRESIONIMP ::= COMA EXPRESION:e  OTRAEXPRESIONIMP 
-                {: 
-                    printLNAdd(e.toString());
-                :}
+OTRAEXPRESIONIMP ::= OTRAEXPRESIONIMP COMA EXPRESION:e {: addPrintExpression(e.toString()); :} 
                   | /* vacio */;
 
 GRAFICA ::= TIPOGRAPH PARA INSTRUCCION OTRAINSTRUCCION TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA;

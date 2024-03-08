@@ -43,7 +43,7 @@ MENOS = "-"
 ESPACIOS = [\ \r\t\f\t\n]+ // para que ignore los espacios
 NOMBRES = [a-zA-Z][a-zA-Z0-9_]* // para que acepte nombres de variables
 ENTEROS = [-+]?[0-9]+
-STRINGT = [\"][^\"\n]+[\"] // para que acepte cadenas de texto dentro de comillas
+STRINGT = [\"][^\"\n]*[\"] // para que acepte cadenas de texto dentro de comillas
 DECIMAL = [-+]?[0-9]+("."[  |0-9]+)? // para que acepte numeros decimales
 // para que reconozca comentarios de una linea que empiecen con !
 COMENTARIOS = "!"([^\r\n]*)
@@ -139,7 +139,14 @@ TK_LABEL = "label"
 {ESPACIOS}      {}
 {NOMBRES}       {Symbol symbol = new Symbol(sym.NOMBRES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
 {ENTEROS}       {Symbol symbol = new Symbol(sym.ENTEROS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
-{STRINGT}       {Symbol symbol = new Symbol(sym.STRINGT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
+
+// Para que reconozca cadenas de texto y guarde el texto sin las comillas
+{STRINGT} {
+    String TextoR = yytext().substring(1, yytext().length() - 1);
+    Symbol symbol = new Symbol(sym.STRINGT, yyline, yycolumn, TextoR);
+    System.out.println("Token reconocido: " + symbol.value);
+    return symbol;
+}
 {DECIMAL}       {Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;}
 {COMENTARIOS}   {}
 {COMENMULTI}    {}
