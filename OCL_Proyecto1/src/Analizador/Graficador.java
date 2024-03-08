@@ -14,24 +14,70 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
  * @author henry
  */
 public class Graficador {
-    public void crearGraphBarra(ArrayList<Integer> valores, String titulo, ArrayList<String> etiquetas) throws IOException{
+
+    public void crearGraphBarra(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas, String titulox, String tituloy) throws IOException{
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valores.size(); i++) {
             dataset.addValue(valores.get(i), "", etiquetas.get(i));
         }
-        JFreeChart chart = ChartFactory.createBarChart(titulo, "Categorías", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart(titulo, titulox, tituloy, dataset, PlotOrientation.VERTICAL, true, true, false);
         CategoryPlot plot = chart.getCategoryPlot();
         plot.setRangeGridlinePaint(java.awt.Color.lightGray);
 
         File imgDir = new File("./imgGraficas");
         if (!imgDir.exists()) imgDir.mkdirs();
-        File chartFile = new File(imgDir, "chart.jpeg");
+        File chartFile = new File(imgDir, titulo + ".jpeg");
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+    }
+
+    public void crearGraphPie(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas) throws IOException{
+       DefaultPieDataset dataset = new DefaultPieDataset();
+        for (int i = 0; i < valores.size(); i++) {
+            dataset.setValue(etiquetas.get(i), valores.get(i));
+        }
+        JFreeChart chart = ChartFactory.createPieChart(titulo, dataset, true, true, false);
+        File imgDir = new File("./imgGraficas");
+        if (!imgDir.exists()) imgDir.mkdirs();
+        File chartFile = new File(imgDir, titulo + ".jpeg");
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+    }
+
+    public void crearGraphLinea(ArrayList<Double> valores, String titulo, String tituloX , String tituloY) throws IOException {
+        XYSeries series = new XYSeries("XYGraph");
+        for (int i = 0; i < valores.size(); i++) {
+            series.add(i, valores.get(i));
+        }
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+        JFreeChart chart = ChartFactory.createXYLineChart(titulo, tituloX, tituloY, dataset, PlotOrientation.VERTICAL, true, true, false);
+        File imgDir = new File("./imgGraficas");
+        if (!imgDir.exists()) imgDir.mkdirs();
+        File chartFile = new File(imgDir, titulo + ".jpeg");
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+    }
+
+    public void crearHistogram(String titulo, ArrayList<Double> valores) throws IOException {
+        HistogramDataset dataset = new HistogramDataset();
+        double[] valueArray = new double[valores.size()];
+        for (int i = 0; i < valores.size(); i++) {
+            valueArray[i] = valores.get(i);
+        }
+        dataset.addSeries("Histogram", valueArray, 10);
+        JFreeChart chart = ChartFactory.createHistogram(titulo, null, null, dataset, PlotOrientation.VERTICAL, false, true, false);
+        File imgDir = new File("./imgGraficas");
+        if (!imgDir.exists()) imgDir.mkdirs();
+        File chartFile = new File(imgDir, titulo + ".jpeg");
         ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
     }
 }
+ 

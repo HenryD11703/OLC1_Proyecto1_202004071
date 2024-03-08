@@ -315,18 +315,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 // Obtener el texto del JTextArea
                 String texto = cuadroTexto.getText();
                 System.out.println(texto);
-                
+
                 Scanner scanner = new Scanner(new BufferedReader(new StringReader(texto)));
-                parser Parser = new parser(scanner);       
+                parser Parser = new parser(scanner);
                 Parser.parse();
                 String console = Parser.getImpresiones();
-                Consola.setText(console);  
+                Consola.setText(console);
                 
                 Graficador graficador = new Graficador();
-        ArrayList<Integer> valores = new ArrayList<>(Arrays.asList(1, 2, 3));
-        ArrayList<String> etiquetas = new ArrayList<>(Arrays.asList("Etiqueta1", "Etiqueta2", "Etiqueta3"));
-        graficador.crearGraphBarra(valores, "Titulo", etiquetas);
+                ArrayList<Double> valores = new ArrayList<>(Arrays.asList(12.0, 3.0, 5.0));
+                ArrayList<String> etiquetas = new ArrayList<>(Arrays.asList("Etiqueta1", "Etiqueta2", "Etiqueta3"));
+
+
+                graficador.crearGraphBarra(valores, "Bar", etiquetas, "EjeX", "EjeY");
                 
+                graficador.crearGraphPie(valores, "Pie", etiquetas);
+
+                graficador.crearGraphLinea(valores, "Linea","Eje x", "Eje y");
+
+                graficador.crearHistogram("Histograma", valores);
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");
