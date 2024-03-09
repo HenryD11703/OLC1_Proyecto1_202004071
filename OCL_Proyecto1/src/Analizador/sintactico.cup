@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Arrays;
 import Clases.graphParameters;
 import Clases.pieParameters;
-
+import Clases.GraphLineParameters;
+import Clases.HistogramParameters;
+import Clases.TablaFrecuencias;
 
 
 //codigo de la clase parser
@@ -35,6 +37,8 @@ parser code
     graphParameters parametro = new graphParameters();
     pieParameters parametroPie = new pieParameters();
     GraphLineParameters parametroLine = new GraphLineParameters();
+    HistogramParameters parametroHistogram = new HistogramParameters();
+    TablaFrecuencias tablaFrecuencias = new TablaFrecuencias();
 
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
@@ -76,6 +80,7 @@ nonterminal OTRAEXPRESIONIMP, GRAPHBAR, GRAPHPIE, GRAPHLINE, HISTOGRAM, INSTRUCC
 nonterminal TITULOGRAFICA, EJEX, EJEY, TITULOX, TITULOY, INSTRUCCIONESGP, INSTRUCCIONP, VALUESGRAPH, INSTRUCCIONESGL;
 nonterminal INSTRUCCIONL, INSTRUCCIONESH, INSTRUCCIONH, LABELGRAPH;
 nonterminal TITULOGRAFICAPIE, TITULOGRAFICALINEA, EJEXLINEA, EJEYLINEA, TITULOXLINEA, TITULOYLINEA;
+nonterminal VALUESGRAPHHI, TITULOGRAFICAHI;
 
 
 
@@ -498,10 +503,37 @@ TITULOYLINEA ::= TK_TITULOY DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
 
 //Grafica de Histograma
 
-HISTOGRAM ::= TK_HISTOGRAM PARA INSTRUCCIONESH TK_EXEC TK_HISTOGRAM TK_END PYCOMA PARC TK_END PYCOMA;
+HISTOGRAM ::= TK_HISTOGRAM PARA INSTRUCCIONESH TK_EXEC TK_HISTOGRAM TK_END PYCOMA PARC TK_END PYCOMA
+            {:
+                ArrayList<Double> datos = parametroHistogram.getValores();
+                String titulo = parametroHistogram.getTitulo();
+                graficaM.crearHistogram(titulo,datos);
+                tablaFrecuencias.setTitulo(titulo);
+                tablaFrecuencias.setValores(datos);
+                tablaFrecuencias.calcularFrecuencias();
+                String TablaF = tablaFrecuencias.toString();
+                addPrintExpression(TablaF);
+                
+            :};
+
 
 INSTRUCCIONESH ::= INSTRUCCIONESH INSTRUCCIONH
                 | /* vacio */;
 
-INSTRUCCIONH ::= TITULOGRAFICA
-                | VALUESGRAPH;
+INSTRUCCIONH ::= TITULOGRAFICAHI
+                | VALUESGRAPHHI;
+
+TITULOGRAFICAHI ::= TK_TITULO DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+                {:
+                    parametroHistogram.setTitulo(e.toString());
+                :};
+
+VALUESGRAPHHI ::= TK_VALUES DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+                {:
+                    ArrayList<Object> datos = (ArrayList<Object>) arr;
+                    ArrayList<Double> datosD = new ArrayList<>();
+                    for(Object dato: datos){
+                        datosD.add(Double.parseDouble(dato.toString()));
+                    }
+                    parametroHistogram.setValores(datosD);
+                :};
