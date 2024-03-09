@@ -77,5 +77,8 @@ public class Graficador {
         File chartFile = new File(imgDir, titulo + ".jpeg");
         ChartUtilities.saveChartAsJPEG(chartFile, chart, 579, 562);
     }
+
+
+    
 }
  
