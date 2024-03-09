@@ -348,6 +348,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jPanel1.repaint();
 
                 // FIXME: no se muestra la imagen y no se por que :(
+                
 
 
 

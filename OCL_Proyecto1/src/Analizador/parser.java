@@ -19,6 +19,7 @@ import Clases.pieParameters;
 import Clases.GraphLineParameters;
 import Clases.HistogramParameters;
 import Clases.TablaFrecuencias;
+import Clases.TablaSimbolos;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -612,6 +613,9 @@ public class parser extends java_cup.runtime.lr_parser {
     HistogramParameters parametroHistogram = new HistogramParameters();
     TablaFrecuencias tablaFrecuencias = new TablaFrecuencias();
 
+    int contadorTokens = 0;
+    ArrayList<TablaSimbolos> Simbolos = new ArrayList<>();
+
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
@@ -678,7 +682,10 @@ class CUP$parser$actions {
           case 1: // INICIO ::= TK_PROGRAM CODIGO OTROCODIGO TK_END TK_PROGRAM 
             {
               Object RESULT =null;
-		  
+		
+    // recorrer arreglo de simbolos y mostrar en consola
+    
+ 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("INICIO",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -768,6 +775,9 @@ class CUP$parser$actions {
           case 11: // NT$0 ::= 
             {
               Object RESULT =null;
+		int varTleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
+		int varTright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
+		Object varT = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
 		Object t = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
@@ -788,6 +798,9 @@ class CUP$parser$actions {
               Object RESULT =null;
               // propagate RESULT from NT$0
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int varTleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).left;
+		int varTright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).right;
+		Object varT = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-11)).value;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
 		Object t = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
@@ -799,10 +812,16 @@ class CUP$parser$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
 
+
     data.put(n.toString(), e);
     for (Object clave : data.keySet()) {
         System.out.println("Clave: " + clave.toString() + " |    Valor: " + data.get(clave).toString());
     }
+
+    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, n.toString(), t.toString() , e , eleft, eright);
+    Simbolos.add(simbolo);
+    contadorTokens++;
+
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("VARIABLE",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -812,6 +831,9 @@ class CUP$parser$actions {
           case 13: // ARREGLO ::= TK_ARR DOSP TIPO DOSP DOSP IDARREGLO MENORQ MENOS LISTA_VALORES TK_END PYCOMA 
             {
               Object RESULT =null;
+		int ttleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).left;
+		int ttright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).right;
+		Object tt = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-10)).value;
 		int Atleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
 		int Atright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
 		Object At = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
@@ -827,6 +849,9 @@ class CUP$parser$actions {
     for(Object valor: miLista){
         System.out.println("Valores para: "+Ai+" son:"+valor);
     }
+    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, Ai.toString(), At.toString() , miLista , ttleft, ttright);
+    Simbolos.add(simbolo);
+    contadorTokens++;
     
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ARREGLO",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);

@@ -14,7 +14,7 @@ import Clases.pieParameters;
 import Clases.GraphLineParameters;
 import Clases.HistogramParameters;
 import Clases.TablaFrecuencias;
-
+import Clases.TablaSimbolos;
 
 //codigo de la clase parser
 //
@@ -39,6 +39,9 @@ parser code
     GraphLineParameters parametroLine = new GraphLineParameters();
     HistogramParameters parametroHistogram = new HistogramParameters();
     TablaFrecuencias tablaFrecuencias = new TablaFrecuencias();
+
+    int contadorTokens = 0;
+    ArrayList<TablaSimbolos> Simbolos = new ArrayList<>();
 
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
@@ -86,7 +89,12 @@ nonterminal VALUESGRAPHHI, TITULOGRAFICAHI;
 
 start with INICIO;
 
-INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM {:  :};
+INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM {:
+    // recorrer arreglo de simbolos y mostrar en consola
+    for (TablaSimbolos simbolo : Simbolos) {
+        System.out.println(simbolo.toString());
+    }
+ :};
 
 CODIGO ::= VARIABLE 
           | ARREGLO 
@@ -100,23 +108,31 @@ OTROCODIGO ::= OTROCODIGO CODIGO
             | /* vacio */; 
 
 
-VARIABLE ::= TK_VAR DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA 
+VARIABLE ::= TK_VAR:varT DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA 
 {:
+
 
     data.put(n.toString(), e);
     for (Object clave : data.keySet()) {
         System.out.println("Clave: " + clave.toString() + " |    Valor: " + data.get(clave).toString());
     }
-:}
-;
 
-ARREGLO ::= TK_ARR DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
+    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, n.toString(), t.toString() , e , eleft, eright);
+    Simbolos.add(simbolo);
+    contadorTokens++;
+
+:};
+
+ARREGLO ::= TK_ARR:tt DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
     data.put(Ai, Av);
     ArrayList<Object> miLista = (ArrayList<Object>) data.get(Ai);
     for(Object valor: miLista){
         System.out.println("Valores para: "+Ai+" son:"+valor);
     }
+    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, Ai.toString(), At.toString() , miLista , ttleft, ttright);
+    Simbolos.add(simbolo);
+    contadorTokens++;
     
 :};
 
