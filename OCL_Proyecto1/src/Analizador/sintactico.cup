@@ -9,6 +9,8 @@ import java.util.Iterator;
 import org.jfree.data.category.DefaultCategoryDataset;
 import java.util.Map;
 import java.util.Arrays;
+import Clases.graphParameters;
+import Clases.pieParameters;
 
 
 
@@ -27,6 +29,13 @@ parser code
 {:
     StringBuilder printString = new StringBuilder();
     HashMap<Object,Object> data = new HashMap<>(); 
+
+    Graficador graficaM = new Graficador();
+
+    graphParameters parametro = new graphParameters();
+    pieParameters parametroPie = new pieParameters();
+    GraphLineParameters parametroLine = new GraphLineParameters();
+
     public void syntax_error(Symbol s){
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
@@ -40,6 +49,11 @@ parser code
      public String getImpresiones() {
         return printString.toString();
     }
+
+    
+
+
+
 :}
 
 action code
@@ -57,8 +71,12 @@ terminal String ENTEROS, DECIMAL, STRINGT, NOMBRES;
 
 nonterminal INICIO, CODIGO, OTROCODIGO, VARIABLE, ARREGLO, IDARREGLO, LISTA_VALORES;
 nonterminal OTRA_EXPRESION, TIPO, EXPRESION, OPERACION, ESTADISTICA, DATOS;
-nonterminal IMPRESION, TIPOIMPRESION, ARREGLOIMP, GRAFICA, TIPOGRAPH, INSTRUCCION, TIPOINSTRUCCION, OTRAINSTRUCCION;
-nonterminal EXPRESIONGRAPH, OTRAEXPRESIONIMP;
+nonterminal IMPRESION, TIPOIMPRESION, ARREGLOIMP, GRAFICA;
+nonterminal OTRAEXPRESIONIMP, GRAPHBAR, GRAPHPIE, GRAPHLINE, HISTOGRAM, INSTRUCCIONESGB, INSTRUCCIONB;
+nonterminal TITULOGRAFICA, EJEX, EJEY, TITULOX, TITULOY, INSTRUCCIONESGP, INSTRUCCIONP, VALUESGRAPH, INSTRUCCIONESGL;
+nonterminal INSTRUCCIONL, INSTRUCCIONESH, INSTRUCCIONH, LABELGRAPH;
+nonterminal TITULOGRAFICAPIE, TITULOGRAFICALINEA, EJEXLINEA, EJEYLINEA, TITULOXLINEA, TITULOYLINEA;
+
 
 
 start with INICIO;
@@ -314,121 +332,176 @@ OTRAEXPRESIONIMP ::= OTRAEXPRESIONIMP COMA EXPRESION:e {: addPrintExpression(e.t
                   //y la imagen que retorne la guarde en un archivo con el nombre de la grafica y mostrar esto 
                   // en el area de imagenes de la interfaz grafica
 
+GRAFICA ::= GRAPHBAR 
+          | GRAPHPIE 
+          | GRAPHLINE 
+          | HISTOGRAM;
 
-// Jfreechart
-// DefaulCategoryDataset dataset = new DefaultCategoryDataset(); para graficas de barras
-// DefaultPieDataset dataset = new DefaultPieDataset(); para graficas de pastel
-// DefaultXYDataset dataset = new DefaultXYDataset(); para graficas de lineas
-// HistogramDataset dataset = new HistogramDataset(); para graficas de histogramas
-// esto esta dnetro de la clase Graficador del paquete de graficas, asi que solo mandar 
-// a llamar e introducir los datos correspondientes a cada grafica
+//Grafica de Barras          
 
-// Graficador graficador = new Graficador();
+GRAPHBAR ::= TK_GRAPHBAR PARA INSTRUCCIONESGB TK_EXEC TK_GRAPHBAR TK_END PYCOMA PARC TK_END PYCOMA
+            {:
+                ArrayList<String> ejeX = parametro.getEjeX();
+                ArrayList<Double> ejeY = parametro.getEjeY();
+                String titulo = parametro.getTitulo();
+                String tituloX = parametro.getTituloX();
+                String tituloY = parametro.getTituloY();
+                graficaM.crearGraphBarra(ejeY,titulo,ejeX,tituloX,tituloY);
+            :};
 
-// if(tg.equals("bar")){
-//public void crearGraphBarra(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas, String titulox, String tituloy) throws IOException{
-// }else if(tg.equals("pie")){
-// public void crearGraphPie(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas) throws IOException{    
-// }else if(tg.equals("line")){
-// public void crearGraphLinea(ArrayList<Double> valores, String titulo, String tituloX , String tituloY) throws IOException {
-// }else if(tg.equals("histogram")){
-// public void crearHistogram(String titulo, ArrayList<Double> valores) throws IOException {    
-// }
-GRAFICA ::= TIPOGRAPH:tg PARA INSTRUCCION:Io OTRAINSTRUCCION:OIo TK_EXEC TIPOGRAPH TK_END PYCOMA PARC TK_END PYCOMA
- {:
- Graficador graficador = new Graficador();
- //A este mapa adjuntarle el mapa de OIo
- Map<String, Object> instruccionDatos = (Map<String, Object>) Io;
-Map<String, Object> instruccionDatos2 = (Map<String, Object>) OIo;
-instruccionDatos.putAll(instruccionDatos2);
-System.out.println(instruccionDatos);
-System.out.println("Haciendo grafica de tipo: "+tg);
- if(tg.equals("bar")){
- //Si es un grafico de barras necesitamos la informacion de Titulo, Arreglo ejeX, Arreglo ejeY, TituloX, TituloY
- //TODO: Crear un arreglo que guarde estos datos, y reemplazar el primero por si se repite uno de estos datos
-    //y luego mandar a llamar al graficador con estos datos
-    Object[] datos = new Object[5]; 
-    //El indice 0 es el titulo
-    //El indice 1 es el arreglo ejeX
-    //El indice 2 es el arreglo ejeY
-    //El indice 3 es el tituloX
-    //El indice 4 es el tituloY
-    Object Titulo = instruccionDatos.get("titulo");
-    Object[] arregloEjeX = (Object[]) instruccionDatos.get("ejeX");
-    Object[] arregloEjeY = (Object[]) instruccionDatos.get("ejeY");
-    Object TituloX = instruccionDatos.get("tituloX");
-    Object TituloY = instruccionDatos.get("tituloY");
-    ArrayList<Object> listaEjeX = new ArrayList<>(Arrays.asList(arregloEjeX));
-    ArrayList<Object> listaEjeY = new ArrayList<>(Arrays.asList(arregloEjeY));
+INSTRUCCIONESGB ::= INSTRUCCIONESGB INSTRUCCIONB
+                | /* vacio */;
 
-    ArrayList<Double> listaEjeXDouble = new ArrayList<>();
-    for (Object elemento : listaEjeX) {
-        double valorDouble = Double.parseDouble(elemento.toString());
-        listaEjeXDouble.add(valorDouble);
-    }
-    ArrayList<String> listaEjeYString = new ArrayList<>();
-    for (Object elemento : listaEjeY) {
-    String valorString = elemento.toString();
-    listaEjeYString.add(valorString);
-    }
-    datos[0] = Titulo;
-    datos[1] = listaEjeX;
-    datos[2] = listaEjeY;
-    datos[3] = TituloX;
-    datos[4] = TituloY;
-    graficador.crearGraphBarra(listaEjeXDouble, datos[0].toString(), listaEjeYString, datos[3].toString(), datos[4].toString());
-    
+INSTRUCCIONB ::= TITULOGRAFICA
+                | EJEX
+                | EJEY
+                | TITULOX
+                | TITULOY;   
+
+TITULOGRAFICA ::= TK_TITULO DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+                {:
+                    parametro.setTitulo(e.toString());
+                :};
+
+EJEX ::= TK_EJEX DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+        {:
+            ArrayList<Object> arrobj = (ArrayList<Object>) arr;
+            ArrayList<String> datos = new ArrayList<>();
+            for(Object dato: arrobj){
+                datos.add(dato.toString());
+            }
+            parametro.setEjeX(datos);
+        :};
+
+EJEY ::= TK_EJEY DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+        {:
+            ArrayList<Object> arrobj = (ArrayList<Object>) arr;
+            ArrayList<Double> datos = new ArrayList<>();
+            for(Object dato: arrobj){
+                datos.add(Double.parseDouble(dato.toString()));
+            }
+            parametro.setEjeY(datos);
+        :};
+
+TITULOX ::= TK_TITULOX DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+        {:
+            parametro.setTituloX(e.toString());
+        :};
+
+TITULOY ::= TK_TITULOY DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+        {:
+            parametro.setTituloY(e.toString());
+        :};
 
 
- }
- :};
 
-TIPOGRAPH ::= TK_GRAPHBAR {: RESULT = "bar"; :}
-            | TK_GRAPHPIE {: RESULT = "pie"; :} 
-            | TK_GRAPHLINE {: RESULT = "line"; :} 
-            | TK_HISTOGRAM {: RESULT = "histogram"; :};
+//Grafica de Pie
 
-INSTRUCCION ::= TIPOINSTRUCCION:tipoI DOSP DOSP TIPO IGUAL EXPRESIONGRAPH:DatosExp TK_END PYCOMA
-{:
-    Map<String, Object> datos = new HashMap<>();
-//hacer un Result de este hashmap y buscar arriba la clave y obtener los valores de cada uno y meter estos en el
-// array de datos para ya mandar a llamar a la clase graficador de cada tipo de grafica
-    if(tipoI.equals("values")){
-        datos.put("values", DatosExp);
-    }else if(tipoI.equals("titulo")){
-        datos.put("titulo", DatosExp);
-    }else if(tipoI.equals("label")){
-        datos.put("label", DatosExp);
-    }else if(tipoI.equals("ejeX")){
-        datos.put("ejeX", DatosExp);
-    }else if(tipoI.equals("ejeY")){
-        datos.put("ejeY", DatosExp);
-    }else if(tipoI.equals("tituloX")){
-        datos.put("tituloX", DatosExp);
-    }else if(tipoI.equals("tituloY")){
-        datos.put("tituloY", DatosExp);
-    }
-    RESULT = datos;
-:};
+GRAPHPIE ::= TK_GRAPHPIE PARA INSTRUCCIONESGP TK_EXEC TK_GRAPHPIE TK_END PYCOMA PARC TK_END PYCOMA
+            {:
+                ArrayList<String> labels = parametroPie.getLabels();
+                ArrayList<Double> values = parametroPie.getValues();
+                String titulo = parametroPie.getTitulo();
+                graficaM.crearGraphPie(values,titulo,labels);
+            :};
+
+INSTRUCCIONESGP ::= INSTRUCCIONESGP INSTRUCCIONP
+                | /* vacio */;
+
+INSTRUCCIONP ::= TITULOGRAFICAPIE
+                | VALUESGRAPH
+                | LABELGRAPH;
+
+TITULOGRAFICAPIE ::= TK_TITULO DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+                {:
+                    parametroPie.setTitulo(e.toString());
+                :};
+
+VALUESGRAPH ::= TK_VALUES DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+                {:
+                    ArrayList<Object> datos = (ArrayList<Object>) arr;
+                    ArrayList<Double> datosD = new ArrayList<>();
+                    for(Object dato: datos){
+                        datosD.add(Double.parseDouble(dato.toString()));
+                    }
+                    parametroPie.setValues(datosD);
+                :};
+
+LABELGRAPH ::= TK_LABEL DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+                {:
+                    ArrayList<Object> datos = (ArrayList<Object>) arr;
+                    ArrayList<String> datosS = new ArrayList<>();
+                    for(Object dato: datos){
+                        datosS.add(dato.toString());
+                    }
+                    parametroPie.setLabels(datosS);
+                :};
 
 
-TIPOINSTRUCCION ::= TK_VALUES {: RESULT="values"; :}
-                    | TK_TITULO {: RESULT="titulo"; :}
-                    | TK_LABEL {: RESULT="label"; :}  
-                    | TK_EJEX {: RESULT="ejeX"; :} 
-                    | TK_EJEY {: RESULT="ejeY"; :} 
-                    | TK_TITULOX {: RESULT="tituloX"; :}  
-                    | TK_TITULOY {: RESULT="tituloY"; :};
+//Grafica de Linea
+
+GRAPHLINE ::= TK_GRAPHLINE PARA INSTRUCCIONESGL TK_EXEC TK_GRAPHLINE TK_END PYCOMA PARC TK_END PYCOMA
+
+            {:
+                ArrayList<String> ejeX = parametroLine.getEjeX();
+                ArrayList<Double> ejeY = parametroLine.getEjeY();
+                String titulo = parametroLine.getTitulo();
+                String tituloX = parametroLine.getTituloX();
+                String tituloY = parametroLine.getTituloY();
+                graficaM.crearGraphLinea(ejeY,titulo,tituloX,tituloY,ejeX);
+            :};
+
+INSTRUCCIONESGL ::= INSTRUCCIONESGL INSTRUCCIONL
+                | /* vacio */;
+
+INSTRUCCIONL ::= TITULOGRAFICALINEA
+                | EJEXLINEA
+                | EJEYLINEA
+                | TITULOXLINEA
+                | TITULOYLINEA;
+
+TITULOGRAFICALINEA ::= TK_TITULO DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+                {:
+                    parametroLine.setTitulo(e.toString());
+                :};
+
+EJEXLINEA ::= TK_EJEX DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+        {:
+            ArrayList<Object> arrobj = (ArrayList<Object>) arr;
+            ArrayList<String> datos = new ArrayList<>();
+            for(Object dato: arrobj){
+                datos.add(dato.toString());
+            }
+            parametroLine.setEjeX(datos);
+        :};
+
+EJEYLINEA ::= TK_EJEY DOSP DOSP TIPO IGUAL ARREGLOIMP:arr TK_END PYCOMA
+        {:
+            ArrayList<Object> arrobj = (ArrayList<Object>) arr;
+            ArrayList<Double> datos = new ArrayList<>();
+            for(Object dato: arrobj){
+                datos.add(Double.parseDouble(dato.toString()));
+            }
+            parametroLine.setEjeY(datos);
+        :};
+
+TITULOXLINEA ::= TK_TITULOX DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+        {:
+            parametroLine.setTituloX(e.toString());
+        :};
+
+TITULOYLINEA ::= TK_TITULOY DOSP DOSP TIPO IGUAL EXPRESION:e TK_END PYCOMA
+        {:
+            parametroLine.setTituloY(e.toString());
+        :};
 
 
-EXPRESIONGRAPH ::= EXPRESION:e {: RESULT=e; :} 
-                | LISTA_VALORES:lista {: RESULT=lista; :};
+//Grafica de Histograma
 
-OTRAINSTRUCCION ::= OTRAINSTRUCCION:OIo  INSTRUCCION:Io 
-                    {: 
-                        Map<String, Object> datos = (Map<String, Object>) OIo;
-                        datos.putAll((Map<String, Object>) Io);
-                        RESULT=Io; 
-                    :} 
-                    | /* vacio */ {: RESULT=new HashMap<>(); :};
+HISTOGRAM ::= TK_HISTOGRAM PARA INSTRUCCIONESH TK_EXEC TK_HISTOGRAM TK_END PYCOMA PARC TK_END PYCOMA;
 
+INSTRUCCIONESH ::= INSTRUCCIONESH INSTRUCCIONH
+                | /* vacio */;
+
+INSTRUCCIONH ::= TITULOGRAFICA
+                | VALUESGRAPH;

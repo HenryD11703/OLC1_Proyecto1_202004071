@@ -37,7 +37,7 @@ public class Graficador {
         File imgDir = new File("./imgGraficas");
         if (!imgDir.exists()) imgDir.mkdirs();
         File chartFile = new File(imgDir, titulo + ".jpeg");
-        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 579, 562);
     }
 
     public void crearGraphPie(ArrayList<Double> valores, String titulo, ArrayList<String> etiquetas) throws IOException{
@@ -49,21 +49,19 @@ public class Graficador {
         File imgDir = new File("./imgGraficas");
         if (!imgDir.exists()) imgDir.mkdirs();
         File chartFile = new File(imgDir, titulo + ".jpeg");
-        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 579, 562);
     }
 
-    public void crearGraphLinea(ArrayList<Double> valores, String titulo, String tituloX , String tituloY) throws IOException {
-        XYSeries series = new XYSeries("XYGraph");
+    public void crearGraphLinea(ArrayList<Double> valores, String titulo, String tituloX , String tituloY, ArrayList<String> etiquetas) throws IOException {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valores.size(); i++) {
-            series.add(i, valores.get(i));
+            dataset.addValue(valores.get(i), titulo, etiquetas.get(i));
         }
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(series);
-        JFreeChart chart = ChartFactory.createXYLineChart(titulo, tituloX, tituloY, dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createLineChart(titulo, tituloX, tituloY, dataset, PlotOrientation.VERTICAL, true, true, false);
         File imgDir = new File("./imgGraficas");
         if (!imgDir.exists()) imgDir.mkdirs();
         File chartFile = new File(imgDir, titulo + ".jpeg");
-        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 579, 562);
     }
 
     public void crearHistogram(String titulo, ArrayList<Double> valores) throws IOException {
@@ -77,7 +75,7 @@ public class Graficador {
         File imgDir = new File("./imgGraficas");
         if (!imgDir.exists()) imgDir.mkdirs();
         File chartFile = new File(imgDir, titulo + ".jpeg");
-        ChartUtilities.saveChartAsJPEG(chartFile, chart, 500, 300);
+        ChartUtilities.saveChartAsJPEG(chartFile, chart, 579, 562);
     }
 }
  

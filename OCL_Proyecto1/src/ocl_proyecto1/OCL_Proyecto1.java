@@ -14,7 +14,8 @@ public class OCL_Proyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MenuPrincipal ventana = new MenuPrincipal();
+        MenuPrincipal ventana;
+        ventana = new MenuPrincipal();
         ventana.setVisible(true);
     }
     

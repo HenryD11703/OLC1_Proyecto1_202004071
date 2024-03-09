@@ -89,12 +89,47 @@ console::print = MediaStats end;
 
 console::column = "Print column" -> ["Hola" , MediaStats, minN, "valores" ] end;
 
+arr:double:: @titulosss <- [ " titulo 1" , "titulo2", "PruebaTDA"] end;
+
+graphBar(
+
+ejeX::char[] = @titulosss end;
+
+titulo::char[] = "EstudiantesDDDD" end;
+
+
+ejeY::double = [50, 30, 70] end;
+tituloX::char[] = "Actividades" end;
+tituloY::char[] = "Notas" end;
+EXEC graphBar end;
+) end;
+
+
+graphBar(
+titulo::char[] = "Estudiantes" end;
+ejeX::char[] = ["1 Parcial", "2 parcial", "Final"] end;
+ejeY::double = [50, 30, 70] end;
+tituloX::char[] = "Actividades" end;
+tituloY::char[] = "Notas" end;
+EXEC graphBar end;
+) end;
 
 graphPie(
 label::char[] = ["Uno", "Dos", "Tres"] end;
 values::double = [50, 30, 20] end;
-titulo::char[] = "Ejemplo Gráfica de Pie" end;
+titulo::char[] = "c" end;
 EXEC graphPie end;
 ) end;
+
+graphLine(
+titulo::char[] = "Gráfica de LíneaXD" end;
+ejeX::char[] = ["1 Parcial", "2 parcial", "Final"] end;
+ejeY::double = [50, 30, 70] end;
+tituloX::char[] ="Actividades" end;
+tituloY::char[] = "Notas" end;
+EXEC graphLine end;
+) end;
+
+
 
 end program
