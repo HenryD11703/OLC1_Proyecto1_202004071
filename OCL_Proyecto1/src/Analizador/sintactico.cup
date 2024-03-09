@@ -94,6 +94,10 @@ INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM {:
     for (TablaSimbolos simbolo : Simbolos) {
         System.out.println(simbolo.toString());
     }
+
+    String ContenidoHtml = TablaSimbolos.reporteHTML(Simbolos);
+    TablaSimbolos.crearHTML(ContenidoHtml);
+
  :};
 
 CODIGO ::= VARIABLE 
