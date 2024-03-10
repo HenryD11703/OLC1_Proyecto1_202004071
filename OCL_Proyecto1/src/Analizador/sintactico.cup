@@ -112,7 +112,9 @@ CODIGO ::= VARIABLE
           | OPERACION 
           | ESTADISTICA     
           | IMPRESION 
-          | GRAFICA;
+          | GRAFICA
+          | error PYCOMA;
+          //recuperacion de errores con metodo de panico hasta encontrar un punto y coma
           
  
 OTROCODIGO ::= OTROCODIGO CODIGO
@@ -133,8 +135,7 @@ VARIABLE ::= TK_VAR:varT DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:
     Simbolos.add(simbolo);
     contadorTokens++;
 
-:}
-|error PYCOMA;
+:};
 
 ARREGLO ::= TK_ARR:tt DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
@@ -147,13 +148,12 @@ ARREGLO ::= TK_ARR:tt DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VAL
     Simbolos.add(simbolo);
     contadorTokens++;
     
-:}
-|error TK_END PYCOMA;
+:};
 
 
 TIPO ::= TK_CHAR {: RESULT = "char[]"; :} 
         | TK_CADENA {: RESULT = "Double"; :} 
-        | error {: RESULT = "NADA"; :}    ;
+ ;
 
 
 IDARREGLO ::= ARRB NOMBRES:nombreA
