@@ -66,6 +66,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -113,16 +114,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -248,6 +260,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ArrayList<File> imagenes = Imagenes.getImages();
+        if (contadorImagenes - 1 >= 0) {
+            contadorImagenes--;
+            File previousImage = imagenes.get(contadorImagenes);
+            try {
+                Image img = ImageIO.read(previousImage);
+                ImageIcon icon = new ImageIcon(img);
+                jLabel1.setIcon(icon);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No hay más imágenes para mostrar");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void cargarArchivo(String extension, JTextArea cuadroTexto) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos " + extension, extension));
@@ -342,24 +371,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 ArrayList<TablaTokens> tokens = scanner.Reportetokens;
                 String HTMLTOKENS = TablaTokens.reporteHTMLT(tokens);
                 TablaTokens.CrearHTML(HTMLTOKENS);
-                
-                
+
                 ArrayList<File> imagenes = Imagenes.getImages();
 
-                File primeraImagen = imagenes.get(0);
-                System.out.println("Imagen a mostrar "+primeraImagen.getName());
-                Image img = ImageIO.read(primeraImagen);
-                JLabel labelI = new JLabel(new ImageIcon(img));
-                jPanel1.add(labelI);
-                jPanel1.revalidate();
-                jPanel1.repaint();
+                File primeraImagen = imagenes.get(contadorImagenes);
+                System.out.println("Imagen a mostrar " + primeraImagen.getName());
+                Image img = ImageIO.read(primeraImagen);//poner esta imagen en el jlabel jLabel1
+                ImageIcon icon = new ImageIcon(img);
+                jLabel1.setIcon(icon);
 
                 // FIXME: no se muestra la imagen y no se por que :(
-                
-
-
-
-
                 System.out.println("El ArrayList contiene las siguientes imágenes:");
                 for (File imagen : imagenes) {
                     System.out.println(imagen.getName());
@@ -368,7 +389,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");
-             
+
         }
     }// GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -381,7 +402,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No hay pestañas abiertas");
         }
 
-    }// GEN-LAST:event_jMenuItem3ActionPerformed
+    }// GEN-LAST:event_jMenuItem3ActionPerformed}
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem4ActionPerformed
         JScrollPane scrollPane = new JScrollPane();
@@ -400,7 +421,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ArrayList<File> imagenes = Imagenes.getImages();
+        if (contadorImagenes + 1 < imagenes.size()) {
+            contadorImagenes++;
+            File siguienteImagen = imagenes.get(contadorImagenes);
+            try {
+                Image img = ImageIO.read(siguienteImagen);
+                ImageIcon icon = new ImageIcon(img);
+                jLabel1.setIcon(icon);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No hay más imágenes para mostrar");
+        }
     }// GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -471,6 +505,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Pestanas;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

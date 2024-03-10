@@ -8,6 +8,7 @@ package Analizador;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import Clases.TablaTokens;
+import Clases.TabErrores;
 
 
 @SuppressWarnings("fallthrough")
@@ -450,6 +451,9 @@ public class Scanner implements java_cup.runtime.Scanner {
   /* user code: */
     public ArrayList<TablaTokens> Reportetokens = new ArrayList<TablaTokens>();
     int contadorTokens = 1;
+    public static ArrayList<TabErrores> ReporteErrores = new ArrayList<TabErrores>();
+    int contadorErrores = 1;
+    
 
 
   /**
@@ -882,6 +886,11 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 1:
             { System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
             yycolumn++;
+
+            // Se agrega el error a la tabla de errores
+
+            ReporteErrores.add(new TabErrores(contadorErrores,"Lexico", yytext() , yyline, yycolumn));
+            contadorErrores++;
             }
           // fall through
           case 51: break;

@@ -4,6 +4,7 @@ package Analizador;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import Clases.TablaTokens;
+import Clases.TabErrores;
 
 %%
 
@@ -11,6 +12,9 @@ import Clases.TablaTokens;
 %{
     public ArrayList<TablaTokens> Reportetokens = new ArrayList<TablaTokens>();
     int contadorTokens = 1;
+    public static ArrayList<TabErrores> ReporteErrores = new ArrayList<TabErrores>();
+    int contadorErrores = 1;
+    
 %}
 
 %init{ 
@@ -159,6 +163,11 @@ TK_LABEL = "label"
 .       {
             System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
             yycolumn++;
+
+            // Se agrega el error a la tabla de errores
+
+            ReporteErrores.add(new TabErrores(contadorErrores,"Lexico", yytext() , yyline, yycolumn));
+            contadorErrores++;
         }
 
 

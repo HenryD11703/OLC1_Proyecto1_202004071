@@ -624,11 +624,16 @@ public class parser extends java_cup.runtime.lr_parser {
         String errorS = " No se esperaba "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right) ;
         System.out.println(errorS);
         ErroresList.add(new TabErrores(contadorErrores, "Sintactico",errorS ,s.left, s.right));
+        contadorErrores++;
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
 
     public void unrecovered_syntax_error(Symbol s){
         System.out.println("Error Sintactico irrecuperable: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
+        String errorS = " No se esperaba "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right) ;
+        System.out.println(errorS);
+        ErroresList.add(new TabErrores(contadorErrores, "Sintactico Irrecuperable F",errorS ,s.left, s.right));
+        contadorErrores++;
     }
     public void addPrintExpression(String expr) {
         printString.append(expr);
@@ -697,6 +702,14 @@ class CUP$parser$actions {
 
     String ContenidoHtml = TablaSimbolos.reporteHTML(Simbolos);
     TablaSimbolos.crearHTML(ContenidoHtml);
+
+    ArrayList<TabErrores> ErroresListC = Scanner.ReporteErrores;
+    //añadir este arraylista a la lista de errores
+    ErroresList.addAll(ErroresListC);
+    //limpiar la lista de errores ErroredListC
+    Scanner.ReporteErrores.clear();
+    String ContenidoErrores = TabErrores.reporteHTMLE(ErroresList);
+    TabErrores.crearHTMLE(ContenidoErrores);
 
  
               CUP$parser$result = parser.getSymbolFactory().newSymbol("INICIO",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
