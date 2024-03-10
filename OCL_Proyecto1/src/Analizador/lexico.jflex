@@ -66,7 +66,10 @@ COMENMULTI = "<!"([^!]|"!"[^>])*"!>"
 TK_PROGRAM = "program"
 TK_VAR = "var"
 TK_CADENA = "double"
+TK_DOUBLEERR = "double[]"
+TK_CHARERR = "char"
 TK_CHAR = "char[]"
+
 TK_END = "end"
 TK_ARR = "arr"
 TK_SUM = "sum"
@@ -103,6 +106,13 @@ TK_LABEL = "label"
 {TK_PROGRAM}    {Symbol symbol = new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_PROGRAM", yyline,yycolumn)); contadorTokens++; return symbol;}
 {TK_VAR}        {Symbol symbol = new Symbol(sym.TK_VAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_VAR", yyline,yycolumn)); contadorTokens++; return symbol;}
 {TK_CADENA}     {Symbol symbol = new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CADENA", yyline,yycolumn)); contadorTokens++; return symbol;}
+//Hacer lo mismo con el char, para cuando venga sin []
+{TK_CHARERR}    {
+    Symbol symbol = new Symbol(sym.TK_CHARERR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); 
+    Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CHARERR", yyline,yycolumn)); contadorTokens++;
+    ReporteErrores.add(new TabErrores(contadorErrores,"Sintactico", "La declaracion de char es con []" , yyline, yycolumn));
+    contadorErrores++; return symbol;
+     }
 {TK_CHAR}       {Symbol symbol = new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CHAR", yyline,yycolumn)); contadorTokens++; return symbol;}
 {TK_END}        {Symbol symbol = new Symbol(sym.TK_END,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_END", yyline,yycolumn)); contadorTokens++; return symbol;}
 {TK_ARR}        {Symbol symbol = new Symbol(sym.TK_ARR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_ARR", yyline,yycolumn)); contadorTokens++; return symbol;}
@@ -159,6 +169,15 @@ TK_LABEL = "label"
 {DECIMAL}       {Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "DECIMAL", yyline,yycolumn)); contadorTokens++; return symbol;}
 {COMENTARIOS}   {}
 {COMENMULTI}    {}
+//Aca manejare el error de cuando se ingrese un double[] y no double para que lo reconozca como un error pero pueda seguir leyendo el archivo
+{TK_DOUBLEERR}  {
+    Symbol symbol = new Symbol(sym.TK_DOUBLEERR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); 
+    Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_DOUBLEERR", yyline,yycolumn)); contadorTokens++; 
+    ReporteErrores.add(new TabErrores(contadorErrores,"Sintactico ", "La declaracion correcta de double es sin []" , yyline, yycolumn));
+    contadorErrores++;return symbol;
+     }
+
+
 //El punto indica todo lo que no sea reconocido anteriormente
 .       {
             System.err.println("Error léxico: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);

@@ -8,55 +8,57 @@ package Analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int NOMBRES = 49;
-  public static final int TK_TITULOY = 42;
-  public static final int TK_TITULOX = 41;
+  public static final int TK_DOUBLEERR = 22;
+  public static final int NOMBRES = 51;
+  public static final int TK_TITULOY = 44;
+  public static final int TK_TITULOX = 43;
   public static final int MENORQ = 3;
-  public static final int TK_EJEY = 40;
-  public static final int TK_EJEX = 39;
-  public static final int TK_DIV = 23;
-  public static final int TK_COLUMN = 33;
-  public static final int TK_TITULO = 38;
-  public static final int TK_MIN = 30;
+  public static final int TK_EJEY = 42;
+  public static final int TK_EJEX = 41;
+  public static final int TK_DIV = 25;
+  public static final int TK_COLUMN = 35;
+  public static final int TK_TITULO = 40;
+  public static final int TK_MIN = 32;
   public static final int IGUAL = 12;
-  public static final int TK_MEDIANA = 26;
+  public static final int TK_MEDIANA = 28;
   public static final int TK_PROGRAM = 14;
-  public static final int TK_MUL = 22;
-  public static final int TK_MOD = 24;
-  public static final int TK_VALUES = 44;
+  public static final int TK_MUL = 24;
+  public static final int TK_CHARERR = 23;
+  public static final int TK_MOD = 26;
+  public static final int TK_VALUES = 46;
   public static final int TK_CADENA = 16;
   public static final int PYCOMA = 5;
-  public static final int DECIMAL = 47;
+  public static final int DECIMAL = 49;
   public static final int EOF = 0;
-  public static final int TK_MODA = 27;
+  public static final int TK_MODA = 29;
   public static final int error = 1;
   public static final int COMA = 11;
-  public static final int TK_VARIANZA = 28;
+  public static final int TK_VARIANZA = 30;
   public static final int MENOS = 13;
-  public static final int ENTEROS = 46;
-  public static final int TK_MEDIA = 25;
+  public static final int ENTEROS = 48;
+  public static final int TK_MEDIA = 27;
   public static final int TK_END = 18;
   public static final int TK_SUM = 20;
-  public static final int TK_HISTOGRAM = 37;
+  public static final int TK_HISTOGRAM = 39;
   public static final int TK_ARR = 19;
-  public static final int TK_LABEL = 45;
-  public static final int TK_GRAPHLINE = 36;
+  public static final int TK_LABEL = 47;
+  public static final int TK_GRAPHLINE = 38;
   public static final int ARRB = 8;
   public static final int MAYORQ = 4;
-  public static final int TK_PRINT = 32;
-  public static final int TK_MAX = 29;
+  public static final int TK_PRINT = 34;
+  public static final int TK_MAX = 31;
   public static final int TK_VAR = 15;
-  public static final int TK_EXEC = 43;
-  public static final int TK_CONSOLE = 31;
+  public static final int TK_EXEC = 45;
+  public static final int TK_CONSOLE = 33;
   public static final int DOSP = 2;
   public static final int PARC = 10;
   public static final int PARA = 9;
-  public static final int TK_GRAPHPIE = 35;
+  public static final int TK_GRAPHPIE = 37;
   public static final int CORC = 7;
   public static final int CORA = 6;
   public static final int TK_RES = 21;
-  public static final int TK_GRAPHBAR = 34;
-  public static final int STRINGT = 48;
+  public static final int TK_GRAPHBAR = 36;
+  public static final int STRINGT = 50;
   public static final int TK_CHAR = 17;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -81,6 +83,8 @@ public class sym {
   "TK_ARR",
   "TK_SUM",
   "TK_RES",
+  "TK_DOUBLEERR",
+  "TK_CHARERR",
   "TK_MUL",
   "TK_DIV",
   "TK_MOD",
