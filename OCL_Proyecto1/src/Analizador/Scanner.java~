@@ -6,6 +6,8 @@ package Analizador;
 
 // importaciones si fuese necesario
 import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import Clases.TablaTokens;
 
 
 @SuppressWarnings("fallthrough")
@@ -446,7 +448,8 @@ public class Scanner implements java_cup.runtime.Scanner {
   private boolean zzEOFDone;
 
   /* user code: */
-
+    public ArrayList<TablaTokens> Reportetokens = new ArrayList<TablaTokens>();
+    int contadorTokens = 1;
 
 
   /**
@@ -888,72 +891,72 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 52: break;
           case 3:
-            { Symbol symbol = new Symbol(sym.PARA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.PARA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "PARENTESIS ABRE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 53: break;
           case 4:
-            { Symbol symbol = new Symbol(sym.PARC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.PARC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "PARENTESIS CIERRA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 54: break;
           case 5:
-            { Symbol symbol = new Symbol(sym.COMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.COMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "COMA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 55: break;
           case 6:
-            { Symbol symbol = new Symbol(sym.MENOS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.MENOS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "MENOS", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 56: break;
           case 7:
-            { Symbol symbol = new Symbol(sym.ENTEROS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.ENTEROS,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "NUMERO ENTERO", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 57: break;
           case 8:
-            { Symbol symbol = new Symbol(sym.DOSP,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.DOSP,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "DOS PUNTOS", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 58: break;
           case 9:
-            { Symbol symbol = new Symbol(sym.PYCOMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.PYCOMA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "PUNTO Y COMA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 59: break;
           case 10:
-            { Symbol symbol = new Symbol(sym.MENORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.MENORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "MENOR QUE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 60: break;
           case 11:
-            { Symbol symbol = new Symbol(sym.IGUAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.IGUAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "IGUAL", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 61: break;
           case 12:
-            { Symbol symbol = new Symbol(sym.MAYORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.MAYORQ,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "MAYOR QUE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 62: break;
           case 13:
-            { Symbol symbol = new Symbol(sym.ARRB,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.ARRB,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "ARROBA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 63: break;
           case 14:
-            { Symbol symbol = new Symbol(sym.NOMBRES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.NOMBRES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "NOMBRE ID", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 64: break;
           case 15:
-            { Symbol symbol = new Symbol(sym.CORA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.CORA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "CORCHETE ABRE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 65: break;
           case 16:
-            { Symbol symbol = new Symbol(sym.CORC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.CORC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "CORCHETE CIERRA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 66: break;
@@ -961,172 +964,172 @@ public class Scanner implements java_cup.runtime.Scanner {
             { String TextoR = yytext().substring(1, yytext().length() - 1);
     Symbol symbol = new Symbol(sym.STRINGT, yyline, yycolumn, TextoR);
     System.out.println("Token reconocido: " + symbol.value);
-    return symbol;
+    Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "CADENA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 67: break;
           case 18:
-            { Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "DECIMAL", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 68: break;
           case 19:
-            { Symbol symbol = new Symbol(sym.TK_ARR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_ARR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_ARR", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 69: break;
           case 20:
-            { Symbol symbol = new Symbol(sym.TK_DIV,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_DIV,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_DIV", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 70: break;
           case 21:
-            { Symbol symbol = new Symbol(sym.TK_END,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_END,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_END", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 71: break;
           case 22:
-            { Symbol symbol = new Symbol(sym.TK_MAX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MAX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MAX", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 72: break;
           case 23:
-            { Symbol symbol = new Symbol(sym.TK_MIN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MIN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MIN", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 73: break;
           case 24:
-            { Symbol symbol = new Symbol(sym.TK_MOD,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MOD,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MOD", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 74: break;
           case 25:
-            { Symbol symbol = new Symbol(sym.TK_MUL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MUL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MUL", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 75: break;
           case 26:
-            { Symbol symbol = new Symbol(sym.TK_RES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_RES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_RES", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 76: break;
           case 27:
-            { Symbol symbol = new Symbol(sym.TK_SUM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_SUM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_SUM", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 77: break;
           case 28:
-            { Symbol symbol = new Symbol(sym.TK_VAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_VAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_VAR", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 78: break;
           case 29:
-            { Symbol symbol = new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_EJEX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_EJEX", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 79: break;
           case 30:
-            { Symbol symbol = new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_EJEY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_EJEY", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 80: break;
           case 31:
-            { Symbol symbol = new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_EXEC,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_EXEC", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 81: break;
           case 32:
-            { Symbol symbol = new Symbol(sym.TK_MODA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MODA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MODA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 82: break;
           case 33:
-            { Symbol symbol = new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_LABEL,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_LABEL", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 83: break;
           case 34:
-            { Symbol symbol = new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MEDIA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MEDIA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 84: break;
           case 35:
-            { Symbol symbol = new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_PRINT,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_PRINT", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 85: break;
           case 36:
-            { Symbol symbol = new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_CHAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CHAR", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 86: break;
           case 37:
-            { Symbol symbol = new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_COLUMN,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_COLUMN", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 87: break;
           case 38:
-            { Symbol symbol = new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_CADENA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CADENA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 88: break;
           case 39:
-            { Symbol symbol = new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_TITULO,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_TITULO", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 89: break;
           case 40:
-            { Symbol symbol = new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_VALUES,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_VALUES", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 90: break;
           case 41:
-            { Symbol symbol = new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_CONSOLE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_CONSOLE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 91: break;
           case 42:
-            { Symbol symbol = new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_MEDIANA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_MEDIANA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 92: break;
           case 43:
-            { Symbol symbol = new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_PROGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_PROGRAM", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 93: break;
           case 44:
-            { Symbol symbol = new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_TITULOX,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_TITULOX", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 94: break;
           case 45:
-            { Symbol symbol = new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_TITULOY,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_TITULOY", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 95: break;
           case 46:
-            { Symbol symbol = new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_GRAPHBAR,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_GRAPHBAR", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 96: break;
           case 47:
-            { Symbol symbol = new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_GRAPHPIE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_GRAPHPIE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 97: break;
           case 48:
-            { Symbol symbol = new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_VARIANZA,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_VARIANZA", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 98: break;
           case 49:
-            { Symbol symbol = new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_GRAPHLINE,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_GRAPHLINE", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 99: break;
           case 50:
-            { Symbol symbol = new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); return symbol;
+            { Symbol symbol = new Symbol(sym.TK_HISTOGRAM,yyline,yycolumn,yytext()); System.out.println("Token reconocido: " + symbol.value); Reportetokens.add( new TablaTokens (contadorTokens, yytext() , "TK_HISTOGRAM", yyline,yycolumn)); contadorTokens++; return symbol;
             }
           // fall through
           case 100: break;

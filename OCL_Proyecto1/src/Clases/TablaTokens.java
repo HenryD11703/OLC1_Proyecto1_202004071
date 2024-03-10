@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 import java.io.BufferedWriter;
@@ -10,23 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author henry
- */
-public class TablaSimbolos {
+public class TablaTokens {
     private int numero;
-    private String nombre;
+    private Object lexema;
     private String Tipo;
-    private Object valor;
     private int linea;
     private int columna;
 
-    public TablaSimbolos(int numero, String nombre, String Tipo, Object valor, int linea, int columna) {
+    public TablaTokens(int numero, Object lexema, String Tipo, int linea, int columna) {
         this.numero = numero;
-        this.nombre = nombre;
+        this.lexema = lexema;
         this.Tipo = Tipo;
-        this.valor = valor;
         this.linea = linea;
         this.columna = columna;
     }
@@ -39,12 +29,12 @@ public class TablaSimbolos {
         this.numero = numero;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Object getLexema() {
+        return lexema;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setLexema(Object lexema) {
+        this.lexema = lexema;
     }
 
     public String getTipo() {
@@ -53,14 +43,6 @@ public class TablaSimbolos {
 
     public void setTipo(String Tipo) {
         this.Tipo = Tipo;
-    }
-
-    public Object getValor() {
-        return valor;
-    }
-
-    public void setValor(Object valor) {
-        this.valor = valor;
     }
 
     public int getLinea() {
@@ -79,7 +61,7 @@ public class TablaSimbolos {
         this.columna = columna;
     }
 
-    public static String reporteHTML(ArrayList<TablaSimbolos> lista) {
+    public static String reporteHTMLT(ArrayList<TablaTokens> lista) {
         StringBuilder html = new StringBuilder();
 
         html.append("<html>\n");
@@ -104,37 +86,35 @@ public class TablaSimbolos {
         html.append("</style>\n");
         html.append("</head>\n");
         html.append("<body>\n");
-        html.append("<h1>Tabla de Simbolos</h1>\n");
+        html.append("<h1>Tabla de Tokens</h1>\n");
         html.append("<table border=\"1\">\n");
         html.append("<tr>\n");
         html.append("<th>Numero</th>\n");
-        html.append("<th>Nombre</th>\n");
+        html.append("<th>Lexema</th>\n");
         html.append("<th>Tipo</th>\n");
-        html.append("<th>Valor</th>\n");
         html.append("<th>Linea</th>\n");
         html.append("<th>Columna</th>\n");
         html.append("</tr>\n");
-
-        for (TablaSimbolos tablaSimbolos : lista) {
+    
+        for (TablaTokens tablaTokens : lista) {
             html.append("<tr>\n");
-            html.append("<td>").append(tablaSimbolos.getNumero()).append("</td>\n");
-            html.append("<td>").append(tablaSimbolos.getNombre()).append("</td>\n");
-            html.append("<td>").append(tablaSimbolos.getTipo()).append("</td>\n");
-            html.append("<td>").append(tablaSimbolos.getValor()).append("</td>\n");
-            html.append("<td>").append(tablaSimbolos.getLinea()).append("</td>\n");
-            html.append("<td>").append(tablaSimbolos.getColumna()).append("</td>\n");
+            html.append("<td>").append(tablaTokens.getNumero()).append("</td>\n");
+            html.append("<td>").append(tablaTokens.getLexema()).append("</td>\n");
+            html.append("<td>").append(tablaTokens.getTipo()).append("</td>\n");
+            html.append("<td>").append(tablaTokens.getLinea()).append("</td>\n");
+            html.append("<td>").append(tablaTokens.getColumna()).append("</td>\n");
             html.append("</tr>\n");
         }
-
+    
         html.append("</table>\n");
         html.append("</body>\n");
         html.append("</html>\n");
-
+    
         return html.toString();
     }
-
-    public static void crearHTML(String textoHtml) {
-        String ruta = "./Reportes/TablaSimbolos.html";
+ 
+    public static void CrearHTML(String textoHtml) {
+        String ruta = "./Reportes/TablaTokens.html";
         String contenido = textoHtml;
         File file = new File(ruta);
         try {
@@ -146,5 +126,4 @@ public class TablaSimbolos {
             e.printStackTrace();
         }
     }
-
 }

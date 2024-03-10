@@ -15,6 +15,7 @@ import Clases.GraphLineParameters;
 import Clases.HistogramParameters;
 import Clases.TablaFrecuencias;
 import Clases.TablaSimbolos;
+import Clases.TabErrores;
 
 //codigo de la clase parser
 //
@@ -39,11 +40,17 @@ parser code
     GraphLineParameters parametroLine = new GraphLineParameters();
     HistogramParameters parametroHistogram = new HistogramParameters();
     TablaFrecuencias tablaFrecuencias = new TablaFrecuencias();
+    int contadorErrores=1;
+    ArrayList<TabErrores> ErroresList = new ArrayList<>();
 
-    int contadorTokens = 0;
+    int contadorTokens = 1;
     ArrayList<TablaSimbolos> Simbolos = new ArrayList<>();
+    
 
     public void syntax_error(Symbol s){
+        String errorS = " No se esperaba "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right) ;
+        System.out.println(errorS);
+        ErroresList.add(new TabErrores(contadorErrores, "Sintactico",errorS ,s.left, s.right));
         System.out.println("Error Sintactico: "+s.value+" en la linea: "+(s.left)+" en la columna: "+(s.right));
     }
 
@@ -103,13 +110,14 @@ INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM {:
 CODIGO ::= VARIABLE 
           | ARREGLO 
           | OPERACION 
-          | ESTADISTICA 
+          | ESTADISTICA     
           | IMPRESION 
-          | GRAFICA
-          | error TK_END PYCOMA;
+          | GRAFICA;
+          
  
 OTROCODIGO ::= OTROCODIGO CODIGO
-            | /* vacio */; 
+            | /* vacio */
+            ; 
 
 
 VARIABLE ::= TK_VAR:varT DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:e {: RESULT = e; :} TK_END PYCOMA 
@@ -125,7 +133,8 @@ VARIABLE ::= TK_VAR:varT DOSP TIPO:t DOSP DOSP NOMBRES:n MENORQ MENOS EXPRESION:
     Simbolos.add(simbolo);
     contadorTokens++;
 
-:};
+:}
+|error PYCOMA;
 
 ARREGLO ::= TK_ARR:tt DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VALORES:Av TK_END PYCOMA
 {:
@@ -134,14 +143,18 @@ ARREGLO ::= TK_ARR:tt DOSP TIPO:At DOSP DOSP IDARREGLO:Ai MENORQ MENOS LISTA_VAL
     for(Object valor: miLista){
         System.out.println("Valores para: "+Ai+" son:"+valor);
     }
-    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, Ai.toString(), At.toString() , miLista , ttleft, ttright);
+    TablaSimbolos simbolo = new TablaSimbolos(contadorTokens, Ai.toString(), At.toString() , miLista , Aileft, Airight);
     Simbolos.add(simbolo);
     contadorTokens++;
     
-:};
+:}
+|error TK_END PYCOMA;
+
 
 TIPO ::= TK_CHAR {: RESULT = "char[]"; :} 
-        | TK_CADENA {: RESULT = "String"; :};
+        | TK_CADENA {: RESULT = "Double"; :} 
+        | error {: RESULT = "NADA"; :}    ;
+
 
 IDARREGLO ::= ARRB NOMBRES:nombreA
 {:

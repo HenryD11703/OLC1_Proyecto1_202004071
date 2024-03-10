@@ -7,6 +7,7 @@ package ocl_proyecto1;
 import Analizador.Scanner;
 import Analizador.parser;
 import Clases.Imagenes;
+import Clases.TablaTokens;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -216,9 +217,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1522, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Pestanas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -232,14 +233,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -337,6 +338,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 String console = Parser.getImpresiones();
                 Consola.setText(console);
 
+                // Generar el reporte de tokens
+                ArrayList<TablaTokens> tokens = scanner.Reportetokens;
+                String HTMLTOKENS = TablaTokens.reporteHTMLT(tokens);
+                TablaTokens.CrearHTML(HTMLTOKENS);
+                
+                
                 ArrayList<File> imagenes = Imagenes.getImages();
 
                 File primeraImagen = imagenes.get(0);
@@ -361,7 +368,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("No hay pestañas abiertas");
-            JOptionPane.showMessageDialog(rootPane, "No hay pestañas abiertas");
+             
         }
     }// GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -378,7 +385,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem4ActionPerformed
         JScrollPane scrollPane = new JScrollPane();
-        JTextArea cuadroTexto = new JTextArea(30, 42);
+        JTextArea cuadroTexto = new JTextArea(32, 72);
         scrollPane.setViewportView(cuadroTexto);
         JPanel panel = new JPanel();
         panel.add(scrollPane);
