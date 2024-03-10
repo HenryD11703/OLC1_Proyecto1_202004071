@@ -118,7 +118,22 @@ INICIO ::= TK_PROGRAM  CODIGO OTROCODIGO TK_END TK_PROGRAM {:
     String ContenidoErrores = TabErrores.reporteHTMLE(ErroresList);
     TabErrores.crearHTMLE(ContenidoErrores);
 
- :};
+ :} | error  {:
+    for (TablaSimbolos simbolo : Simbolos) {
+        System.out.println(simbolo.toString());
+    }
+
+    String ContenidoHtml = TablaSimbolos.reporteHTML(Simbolos);
+    TablaSimbolos.crearHTML(ContenidoHtml);
+
+    ArrayList<TabErrores> ErroresListC = Scanner.ReporteErrores;
+    //añadir este arraylista a la lista de errores
+    ErroresList.addAll(ErroresListC);
+    //limpiar la lista de errores ErroredListC
+    Scanner.ReporteErrores.clear();
+    String ContenidoErrores = TabErrores.reporteHTMLE(ErroresList);
+    TabErrores.crearHTMLE(ContenidoErrores);
+:};
 
 CODIGO ::= VARIABLE 
           | ARREGLO 
