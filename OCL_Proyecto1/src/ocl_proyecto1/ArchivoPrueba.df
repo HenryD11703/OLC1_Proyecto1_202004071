@@ -92,12 +92,8 @@ console::column = "Print column" -> ["Hola" , MediaStats, minN, "valores" ] end;
 arr:double:: @titulosss <- [ " titulo 1" , "titulo2", "PruebaTDA"] end;
 
 graphBar(
-
 ejeX::char[] = @titulosss end;
-
 titulo::char[] = "EstudiantesDDDD" end;
-
-
 ejeY::double = [50, 30, 70] end;
 tituloX::char[] = "Actividades" end;
 tituloY::char[] = "Notas" end;
