@@ -1,9 +1,0 @@
-PRogRaM !HOLA
-
-
-var:double :: numero <- SUM(MOD(2,4),DIV( mul(SUM(1,res(20,mul(3,SUM(1,1)))),3) ,3)) end;
-console::print =  "El resultado es: ",numero end;
-console::print =  "-----------------------" end;
-
-End program
-
